@@ -49,7 +49,7 @@
       </div>
 
       <div class="local-section__more">
-        <NuxtLink :to="localMoreLink" class="btn btn--accent local-section__button">
+        <NuxtLink :to="$lp(localMoreLink)" class="btn btn--accent local-section__button">
           {{ $t('Hamısına bax') }}
           <i class="bi bi-arrow-right" />
         </NuxtLink>

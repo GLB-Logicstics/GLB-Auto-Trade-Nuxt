@@ -15,16 +15,16 @@
         </div>
 
         <div class="header__group">
-          <NuxtLink to="/favourite" class="header__top-link">
+          <NuxtLink :to="$lp('/favourite')" class="header__top-link">
             <i class="bi bi-heart" />
             {{ $t('Seçilmişlər') }}
           </NuxtLink>
           <span class="header__divider" />
-          <NuxtLink v-if="loggedIn" to="/profile" class="header__top-link">
+          <NuxtLink v-if="loggedIn" :to="$lp('/profile')" class="header__top-link">
             <i class="bi bi-person-circle" />
             {{ firstName }}
           </NuxtLink>
-          <NuxtLink v-else to="/login" class="header__top-link">
+          <NuxtLink v-else :to="$lp('/login')" class="header__top-link">
             <i class="bi bi-person-badge" />
             {{ $t('Daxil ol') }}
           </NuxtLink>
@@ -45,14 +45,14 @@
 
     <div class="header__main">
       <div class="container header__main-inner">
-        <NuxtLink to="/" class="header__logo">
+        <NuxtLink :to="$lp('/')" class="header__logo">
           <img :src="$asset(info.logo)" :alt="info.name" width="361" height="160">
         </NuxtLink>
 
         <nav class="header__nav">
           <ul class="nav">
             <li v-for="item in mainNav" :key="item.label" class="nav__item">
-              <NuxtLink v-if="item.to" :to="item.to" class="nav__link">{{ $t(item.label) }}</NuxtLink>
+              <NuxtLink v-if="item.to" :to="$lp(item.to)" class="nav__link">{{ $t(item.label) }}</NuxtLink>
 
               <template v-else>
                 <button type="button" class="nav__link">
@@ -61,7 +61,7 @@
                 </button>
                 <ul class="nav__submenu">
                   <li v-for="child in item.children" :key="child.to">
-                    <NuxtLink :to="child.to" class="nav__sublink">{{ $t(child.label) }}</NuxtLink>
+                    <NuxtLink :to="$lp(child.to)" class="nav__sublink">{{ $t(child.label) }}</NuxtLink>
                   </li>
                 </ul>
               </template>

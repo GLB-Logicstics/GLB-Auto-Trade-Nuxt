@@ -2,7 +2,7 @@
   <footer class="app-footer">
     <div class="container app-footer__grid">
       <div class="app-footer__col app-footer__col--about">
-        <NuxtLink to="/" class="app-footer__logo" :aria-label="info.name">
+        <NuxtLink :to="$lp('/')" class="app-footer__logo" :aria-label="info.name">
           <img :src="$asset(info.logoDark)" :alt="info.name" width="361" height="160" loading="lazy">
         </NuxtLink>
         <p class="app-footer__about">{{ $tr(info, 'about') }}</p>
@@ -23,7 +23,7 @@
         <h3 class="app-footer__title">{{ $t('Faydalı Linklər') }}</h3>
         <ul class="app-footer__links">
           <li v-for="link in footerLinks" :key="link.to">
-            <NuxtLink :to="link.to" class="app-footer__link">{{ $t(link.label) }}</NuxtLink>
+            <NuxtLink :to="$lp(link.to)" class="app-footer__link">{{ $t(link.label) }}</NuxtLink>
           </li>
         </ul>
       </nav>
@@ -32,7 +32,7 @@
         <h3 class="app-footer__title">{{ $t('Məlumat') }}</h3>
         <ul class="app-footer__links">
           <li v-for="link in infoLinks" :key="link.to">
-            <NuxtLink :to="link.to" class="app-footer__link">{{ $t(link.label) }}</NuxtLink>
+            <NuxtLink :to="$lp(link.to)" class="app-footer__link">{{ $t(link.label) }}</NuxtLink>
           </li>
         </ul>
       </nav>

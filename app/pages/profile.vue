@@ -5,8 +5,8 @@
     :text="$t('Profilinizi görmək üçün daxil olun və ya qeydiyyatdan keçin.')"
     icon="bi-person"
   >
-    <NuxtLink to="/login" class="btn btn--accent btn--block">{{ $t('Daxil ol') }}</NuxtLink>
-    <NuxtLink to="/register" class="btn btn--outline btn--block">{{ $t('Qeydiyyat') }}</NuxtLink>
+    <NuxtLink :to="$lp('/login')" class="btn btn--accent btn--block">{{ $t('Daxil ol') }}</NuxtLink>
+    <NuxtLink :to="$lp('/register')" class="btn btn--outline btn--block">{{ $t('Qeydiyyat') }}</NuxtLink>
   </AuthCard>
 
   <div v-else class="container">
@@ -80,7 +80,7 @@
             <p v-else-if="user.dealerStatus === 'rejected'" class="profile-page__notice is-error">
               {{ $t('Diler müraciətiniz təsdiqlənmədi. Ətraflı məlumat üçün bizimlə əlaqə saxlayın.') }}
             </p>
-            <NuxtLink v-else to="/cabinet" class="profile-page__link">
+            <NuxtLink v-else :to="$lp('/cabinet')" class="profile-page__link">
               <i class="bi bi-car-front" />
               {{ $t('Avtomobillərim') }}
               <i class="bi bi-arrow-right" />
@@ -94,16 +94,16 @@
             {{ $t('Qısa keçidlər') }}
           </h2>
           <div class="panel__body">
-            <NuxtLink to="/favourite" class="profile-page__link">
+            <NuxtLink :to="$lp('/favourite')" class="profile-page__link">
               <i class="bi bi-heart" />
               {{ $t('Seçilmişlər') }}
               <b>{{ ids.length }}</b>
             </NuxtLink>
-            <NuxtLink to="/auction-calculator" class="profile-page__link">
+            <NuxtLink :to="$lp('/auction-calculator')" class="profile-page__link">
               <i class="bi bi-calculator" />
               {{ $t('Hərrac kalkulyatoru') }}
             </NuxtLink>
-            <NuxtLink to="/tracking" class="profile-page__link">
+            <NuxtLink :to="$lp('/tracking')" class="profile-page__link">
               <i class="bi bi-geo" />
               {{ $t('Avtomobil izləmə') }}
             </NuxtLink>
@@ -155,7 +155,7 @@ export default defineComponent({
 
     signOut() {
       this.logout()
-      this.$router.push('/')
+      this.$router.push(this.$lp('/'))
     },
   },
 })

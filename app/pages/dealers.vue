@@ -16,7 +16,7 @@
 
     <div class="card dealers-page__cabinet">
       <p>{{ $t('Diler hesabını GLB Logistics yaradır. Aşağıdakı formu göndərin — hesab məlumatlarınızı sizə göndərək, sonra avtomobillərinizi özünüz əlavə edib klikləri izləyəcəksiniz.') }}</p>
-      <NuxtLink :to="dealerApproved ? '/cabinet' : '/login'" class="btn btn--accent">
+      <NuxtLink :to="$lp(dealerApproved ? '/cabinet' : '/login')" class="btn btn--accent">
         {{ dealerApproved ? $t('Diler kabineti') : $t('Diler kabinetinə daxil ol') }}
       </NuxtLink>
     </div>

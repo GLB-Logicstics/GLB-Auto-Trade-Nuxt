@@ -1,7 +1,7 @@
 <template>
   <article class="local-card" :class="{ 'is-sold': car.sold }">
     <div class="local-card__media">
-      <NuxtLink :to="link" class="local-card__image-link">
+      <NuxtLink :to="$lp(link)" class="local-card__image-link">
         <img
           :src="car.image"
           :alt="car.title"
@@ -23,7 +23,7 @@
 
       <div class="local-card__head">
         <h3 class="local-card__title">
-          <NuxtLink :to="link">{{ car.title }}</NuxtLink>
+          <NuxtLink :to="$lp(link)">{{ car.title }}</NuxtLink>
         </h3>
         <span class="local-card__year">{{ car.year }}</span>
       </div>
@@ -53,7 +53,7 @@
         </li>
       </ul>
 
-      <NuxtLink :to="link" class="link-arrow local-card__more">
+      <NuxtLink :to="$lp(link)" class="link-arrow local-card__more">
         {{ $t('Ətraflı bax') }}
         <i class="bi bi-arrow-right" />
       </NuxtLink>

@@ -10,7 +10,7 @@
         <i class="bi bi-whatsapp" />
         {{ $t('WhatsApp ilə yaz') }}
       </a>
-      <NuxtLink to="/login" class="btn btn--outline btn--block">{{ $t('Daxil ol') }}</NuxtLink>
+      <NuxtLink :to="$lp('/login')" class="btn btn--outline btn--block">{{ $t('Daxil ol') }}</NuxtLink>
     </div>
 
     <form v-else class="auth-form" novalidate @submit.prevent="submit">
@@ -39,7 +39,7 @@
 
       <label class="checkbox">
         <input v-model="agree" type="checkbox">
-        <span> <NuxtLink to="/terms">{{ $t('İstifadə şərtləri') }}</NuxtLink> {{ $t('ilə razıyam') }} </span>
+        <span> <NuxtLink :to="$lp('/terms')">{{ $t('İstifadə şərtləri') }}</NuxtLink> {{ $t('ilə razıyam') }} </span>
       </label>
 
       <p v-if="serverError" class="form-error">{{ $t(serverError) }}</p>
@@ -50,7 +50,7 @@
 
       <p class="auth-form__switch">
         {{ $t('Hesabınız var?') }}
-        <NuxtLink to="/login">{{ $t('Daxil olun') }}</NuxtLink>
+        <NuxtLink :to="$lp('/login')">{{ $t('Daxil olun') }}</NuxtLink>
       </p>
     </form>
   </AuthCard>
@@ -100,7 +100,7 @@ export default defineComponent({
       this.sending = true
       this.serverError = await this.register({ ...this.form, company: '', password: this.password })
       this.sending = false
-      if (!this.serverError) this.$router.push('/profile')
+      if (!this.serverError) this.$router.push(this.$lp('/profile'))
     },
   },
 })

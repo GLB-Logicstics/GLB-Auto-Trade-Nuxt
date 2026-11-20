@@ -1,6 +1,6 @@
 <template>
   <nav class="calc-tabs">
-    <NuxtLink v-for="tab in tabs" :key="tab.to" :to="tab.to" class="calc-tabs__link">
+    <NuxtLink v-for="tab in tabs" :key="tab.to" :to="$lp(tab.to)" class="calc-tabs__link">
       <i :class="['bi', tab.icon]" />
       {{ $t(tab.label) }}
     </NuxtLink>

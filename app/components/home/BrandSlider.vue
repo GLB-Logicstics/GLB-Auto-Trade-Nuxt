@@ -3,7 +3,7 @@
     <div class="container">
       <UiSwiper :items="brands" :options="options" variant="brands" navigation>
         <template #default="{ item }">
-          <NuxtLink :to="`/auction-lots?makes=${item.name}`" class="brands__item">
+          <NuxtLink :to="$lp(`/auction-lots?makes=${item.name}`)" class="brands__item">
             <span class="brands__logo">
               <img :src="$asset(item.logo)" :alt="item.name" width="80" height="80" loading="lazy">
             </span>

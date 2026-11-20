@@ -8,7 +8,7 @@
 
     <article class="card news-page">
       <p v-for="(text, index) in $tr(news, 'text')" :key="index">{{ text }}</p>
-      <NuxtLink to="/information" class="link-arrow">
+      <NuxtLink :to="$lp('/information')" class="link-arrow">
         <i class="bi bi-arrow-left" />
         {{ $t('Bütün xəbərlər') }}
       </NuxtLink>

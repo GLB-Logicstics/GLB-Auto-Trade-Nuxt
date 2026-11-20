@@ -25,7 +25,7 @@
             <i class="bi bi-whatsapp" />
             {{ $t('WhatsApp') }}
           </a>
-          <NuxtLink to="/contact" class="link-arrow">
+          <NuxtLink :to="$lp('/contact')" class="link-arrow">
             {{ $t('Əlaqə səhifəsi') }}
             <i class="bi bi-arrow-right" />
           </NuxtLink>

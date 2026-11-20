@@ -9,13 +9,13 @@
         <p class="home-tools__text">{{ $t('Marka, model və hissə növünə görə axtarın, tapılmayanı ABŞ-dan gətirək.') }}</p>
 
         <div class="home-tools__types">
-          <NuxtLink v-for="type in types" :key="type.value" :to="`/parts?type=${type.value}`" class="home-tools__type">
+          <NuxtLink v-for="type in types" :key="type.value" :to="$lp(`/parts?type=${type.value}`)" class="home-tools__type">
             <i :class="['bi', type.icon]" />
             {{ $t(type.label) }}
           </NuxtLink>
         </div>
 
-        <NuxtLink to="/parts" class="link-arrow">
+        <NuxtLink :to="$lp('/parts')" class="link-arrow">
           {{ $t('Bütün hissələr') }}
           <i class="bi bi-arrow-right" />
         </NuxtLink>
@@ -40,7 +40,7 @@
             @update:model-value="setModel"
           />
           <BaseSelect v-model="year" :options="yearOptions" :disabled="!model" :placeholder="$t('İl')" />
-          <NuxtLink :to="catalogLink" class="btn btn--accent">
+          <NuxtLink :to="$lp(catalogLink)" class="btn btn--accent">
             <i class="bi bi-calculator" />
             {{ $t('Hesabla') }}
           </NuxtLink>

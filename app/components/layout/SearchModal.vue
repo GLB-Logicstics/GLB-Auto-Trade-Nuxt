@@ -15,7 +15,7 @@
 
           <ul v-if="suggestions.length" class="search-modal__results">
             <li v-for="item in suggestions" :key="item.to + item.title">
-              <NuxtLink :to="item.to" class="search-modal__result" @click="closeSearch">
+              <NuxtLink :to="$lp(item.to)" class="search-modal__result" @click="closeSearch">
                 <span class="search-modal__result-title">{{ item.title }}</span>
                 <span class="search-modal__result-subtitle">{{ $t(item.subtitle) }}</span>
               </NuxtLink>
@@ -88,7 +88,7 @@ export default defineComponent({
     },
 
     submit() {
-      this.$router.push({ path: '/auction-lots', query: { q: this.text.trim() } })
+      this.$router.push(this.$lp({ path: '/auction-lots', query: { q: this.text.trim() } }))
       this.clearText()
       this.closeSearch()
     },

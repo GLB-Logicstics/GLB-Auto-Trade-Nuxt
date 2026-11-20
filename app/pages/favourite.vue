@@ -15,7 +15,7 @@
         <i class="bi bi-heart" />
         <h2>{{ $t('Siyahı boşdur') }}</h2>
         <p>{{ $t('Bəyəndiyiniz avtomobilləri ürək düyməsi ilə seçilmişlərə əlavə edin.') }}</p>
-        <NuxtLink to="/auction-lots" class="btn btn--accent">{{ $t('Hərrac lotlarına bax') }}</NuxtLink>
+        <NuxtLink :to="$lp('/auction-lots')" class="btn btn--accent">{{ $t('Hərrac lotlarına bax') }}</NuxtLink>
       </div>
     </template>
 
@@ -26,11 +26,11 @@
         {{ $t('Bəyəndiyiniz avtomobillər yadda saxlanılıb. Onların siyahısını görmək üçün hesabınıza daxil olun.') }}
       </p>
       <div class="login-required__actions">
-        <NuxtLink :to="{ path: '/login', query: { redirect: '/favourite' } }" class="btn btn--accent">
+        <NuxtLink :to="$lp({ path: '/login', query: { redirect: '/favourite' } })" class="btn btn--accent">
           <i class="bi bi-box-arrow-in-right" />
           {{ $t('Daxil ol') }}
         </NuxtLink>
-        <NuxtLink to="/auction-lots" class="login-required__link">{{ $t('Hərrac lotlarına bax') }}</NuxtLink>
+        <NuxtLink :to="$lp('/auction-lots')" class="login-required__link">{{ $t('Hərrac lotlarına bax') }}</NuxtLink>
       </div>
     </div>
   </div>

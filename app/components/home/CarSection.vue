@@ -26,7 +26,7 @@
       </div>
 
       <div class="car-section__more">
-        <NuxtLink :to="section.moreLink" class="btn btn--accent car-section__button">
+        <NuxtLink :to="$lp(section.moreLink)" class="btn btn--accent car-section__button">
           {{ $t('Hamısına bax') }}
           <i class="bi bi-arrow-right" />
         </NuxtLink>

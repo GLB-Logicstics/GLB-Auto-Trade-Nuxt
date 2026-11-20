@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="`/services/${service.slug}`" class="service-card">
+  <NuxtLink :to="$lp(`/services/${service.slug}`)" class="service-card">
     <span class="service-card__icon"><i :class="['bi', service.icon]" /></span>
     <h3 class="service-card__title">{{ $tr(service, 'title') }}</h3>
     <p class="service-card__text">{{ $tr(service, 'short') }}</p>

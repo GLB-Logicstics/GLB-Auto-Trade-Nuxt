@@ -3,7 +3,7 @@
     <div class="auction-card__media">
       <UiSwiper :items="car.images" :options="galleryOptions" variant="gallery" navigation pagination>
         <template #default="{ item, index }">
-          <NuxtLink :to="link" class="auction-card__image-link">
+          <NuxtLink :to="$lp(link)" class="auction-card__image-link">
             <img
               :src="item"
               :alt="car.title"
@@ -27,7 +27,7 @@
 
     <div class="auction-card__body">
       <h3 class="auction-card__title">
-        <NuxtLink :to="link">{{ car.title }}</NuxtLink>
+        <NuxtLink :to="$lp(link)">{{ car.title }}</NuxtLink>
       </h3>
 
       <ul class="auction-card__specs">
@@ -58,7 +58,7 @@
           {{ $t('İndi al:') }}
           <strong>{{ car.buyNowPrice ? formatUsd(car.buyNowPrice) : $t('Təklif ilə') }}</strong>
         </p>
-        <NuxtLink :to="link" class="link-arrow">
+        <NuxtLink :to="$lp(link)" class="link-arrow">
           {{ $t('Ətraflı bax') }}
           <i class="bi bi-arrow-up-right" />
         </NuxtLink>

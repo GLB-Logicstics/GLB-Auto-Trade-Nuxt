@@ -5,7 +5,7 @@
         <i :class="['bi', item.icon]" />
       </button>
 
-      <NuxtLink v-else :to="item.to!" class="bottom-nav__link">
+      <NuxtLink v-else :to="$lp(item.to!)" class="bottom-nav__link">
         <i :class="['bi', item.icon]" />
         {{ $t(item.label) }}
       </NuxtLink>

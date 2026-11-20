@@ -40,11 +40,11 @@ export default defineComponent({
   },
 
   methods: {
-    ...mapActions(useI18nStore, ['setLanguage']),
+    ...mapActions(useI18nStore, ['pathFor']),
 
     select(code: string) {
-      this.setLanguage(code)
       this.close()
+      if (code !== this.lang) this.$router.push(this.pathFor(this.$route.fullPath, code))
     },
 
     close() {

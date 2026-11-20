@@ -17,7 +17,7 @@
 
         <ul class="notifications__list">
           <li v-for="item in notifications" :key="item.id">
-            <NuxtLink :to="`/information/${item.id}`" class="notifications__item" @click="close">
+            <NuxtLink :to="$lp(`/information/${item.id}`)" class="notifications__item" @click="close">
               <span class="notifications__icon">
                 <i class="bi bi-newspaper" />
               </span>
@@ -29,7 +29,7 @@
           </li>
         </ul>
 
-        <NuxtLink to="/information" class="notifications__all" @click="close">
+        <NuxtLink :to="$lp('/information')" class="notifications__all" @click="close">
           {{ $t('Bütün xəbərlər') }}
           <i class="bi bi-arrow-right" />
         </NuxtLink>

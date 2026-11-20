@@ -29,7 +29,7 @@ export default defineComponent({
 
   methods: {
     goHome() {
-      clearError({ redirect: '/' })
+      clearError({ redirect: this.$lp('/') })
     },
   },
 })

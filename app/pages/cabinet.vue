@@ -5,7 +5,7 @@
     :text="$t('Bu bölmə yalnız təsdiqlənmiş dilerlər üçündür.')"
     icon="bi-shop"
   >
-    <NuxtLink :to="loggedIn ? '/profile' : '/login'" class="btn btn--accent btn--block">
+    <NuxtLink :to="$lp(loggedIn ? '/profile' : '/login')" class="btn btn--accent btn--block">
       {{ loggedIn ? $t('Profilə keç') : $t('Daxil ol') }}
     </NuxtLink>
   </AuthCard>

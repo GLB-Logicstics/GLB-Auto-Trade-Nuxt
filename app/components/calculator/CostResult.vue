@@ -35,7 +35,7 @@
     <p class="cost-result__note">{{ $t('Hesablama təxminidir. Dəqiq məbləğ üçün bizimlə əlaqə saxlayın.') }}</p>
 
     <div class="cost-result__contact">
-      <NuxtLink to="/contact" class="btn btn--accent btn--sm">{{ $t('Sorğu göndər') }}</NuxtLink>
+      <NuxtLink :to="$lp('/contact')" class="btn btn--accent btn--sm">{{ $t('Sorğu göndər') }}</NuxtLink>
       <a :href="contact.whatsapp" class="btn btn--outline btn--sm" target="_blank" rel="noopener">
         <i class="bi bi-whatsapp cost-result__whatsapp" />
         {{ $t('Bizə yazın') }}

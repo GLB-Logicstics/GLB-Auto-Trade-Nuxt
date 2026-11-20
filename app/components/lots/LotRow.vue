@@ -1,14 +1,14 @@
 <template>
   <article class="lot-row">
     <div class="lot-row__main">
-      <NuxtLink :to="link" class="lot-row__image">
+      <NuxtLink :to="$lp(link)" class="lot-row__image">
         <img :src="lot.images[0]" :alt="lot.title" width="240" height="180" loading="lazy" @error="onImageError">
         <span class="lot-row__auction">{{ lot.auction }}</span>
       </NuxtLink>
 
       <div class="lot-row__info">
         <h3 class="lot-row__title">
-          <NuxtLink :to="link">{{ lot.title }}</NuxtLink>
+          <NuxtLink :to="$lp(link)">{{ lot.title }}</NuxtLink>
         </h3>
         <span class="lot-row__lot">Lot #{{ lot.lotNumber }} · {{ $t(auctionTypeLabel) }}</span>
         <span class="lot-row__status" :style="{ color: status.color }">
@@ -43,7 +43,7 @@
           <strong class="lot-row__buy">{{ lot.buyNowPrice ? formatUsd(lot.buyNowPrice) : '—' }}</strong>
         </p>
         <div class="lot-row__actions">
-          <NuxtLink :to="link" class="btn btn--accent lot-row__button">{{ $t('Ətraflı') }}</NuxtLink>
+          <NuxtLink :to="$lp(link)" class="btn btn--accent lot-row__button">{{ $t('Ətraflı') }}</NuxtLink>
           <FavouriteButton :id="`lot-${lot.id}`"/>
         </div>
       </div>

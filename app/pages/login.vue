@@ -25,7 +25,7 @@
 
       <p class="auth-form__switch">
         {{ $t('Hesabınız yoxdur?') }}
-        <NuxtLink to="/register">{{ $t('Qeydiyyatdan keçin') }}</NuxtLink>
+        <NuxtLink :to="$lp('/register')">{{ $t('Qeydiyyatdan keçin') }}</NuxtLink>
       </p>
     </form>
   </AuthCard>
@@ -64,7 +64,7 @@ export default defineComponent({
       this.sending = true
       this.serverError = await this.login(this.email, this.password)
       this.sending = false
-      if (!this.serverError) this.$router.push(String(this.$route.query.redirect || '/profile'))
+      if (!this.serverError) this.$router.push(this.$lp(String(this.$route.query.redirect || '/profile')))
     },
   },
 })

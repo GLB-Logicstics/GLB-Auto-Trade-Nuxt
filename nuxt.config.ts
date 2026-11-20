@@ -8,6 +8,17 @@ export default defineNuxtConfig({
 
   components: [{ path: '~/components', pathPrefix: false }],
 
+  hooks: {
+    'pages:extend'(pages) {
+      const localized = pages.map((page) => ({
+        ...page,
+        name: page.name ? page.name + '___lang' : undefined,
+        path: '/:lang([a-z]{2})' + (page.path === '/' ? '' : page.path),
+      }))
+      pages.push(...localized)
+    },
+  },
+
   routeRules:
     process.env.SITE_INDEX === 'true' ? {} : { '/**': { headers: { 'X-Robots-Tag': 'noindex, nofollow' } } },
 

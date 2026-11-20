@@ -7,7 +7,7 @@
     />
 
     <div class="card-grid">
-      <NuxtLink v-for="item in notifications" :key="item.id" :to="`/information/${item.id}`" class="card news-card">
+      <NuxtLink v-for="item in notifications" :key="item.id" :to="$lp(`/information/${item.id}`)" class="card news-card">
         <span class="news-card__date"><i class="bi bi-calendar3" /> {{ item.date }}</span>
         <h2 class="news-card__title">{{ $tr(item, 'title') }}</h2>
         <p class="news-card__text">{{ $tr(item, 'text')[0] }}</p>

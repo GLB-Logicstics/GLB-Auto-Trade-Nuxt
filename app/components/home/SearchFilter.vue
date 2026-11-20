@@ -60,7 +60,7 @@ export default defineComponent({
     ...mapActions(useSearchStore, ['setMake', 'setYearFrom']),
 
     submit() {
-      this.$router.push({ path: this.filterPath, query: this.filterQuery })
+      this.$router.push(this.$lp({ path: this.filterPath, query: this.filterQuery }))
     },
   },
 })

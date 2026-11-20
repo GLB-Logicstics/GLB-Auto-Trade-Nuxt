@@ -1,14 +1,14 @@
 <template>
   <article class="car-row" :class="{ 'is-sold': car.sold }">
     <div class="car-row__main">
-      <NuxtLink :to="link" class="car-row__image">
+      <NuxtLink :to="$lp(link)" class="car-row__image">
         <img :src="car.image" :alt="car.title" width="240" height="180" loading="lazy" @error="onImageError">
         <span class="car-row__status">{{ car.sold ? $t('Satılıb') : $t('Satılır') }}</span>
       </NuxtLink>
 
       <div class="car-row__info">
         <h3 class="car-row__title">
-          <NuxtLink :to="link">{{ car.year }} {{ car.title }}</NuxtLink>
+          <NuxtLink :to="$lp(link)">{{ car.year }} {{ car.title }}</NuxtLink>
         </h3>
         <p><span>{{ $t('Mühərrik:') }}</span> {{ car.engine }} / {{ car.power }} a.g.</p>
         <p class="car-row__dealer"><i class="bi bi-shop" /> {{ car.dealer.name }}</p>
@@ -24,7 +24,7 @@
         <p v-if="diff > 0" class="car-row__diff">+{{ formatUsd(diff) }} {{ $t('bazar qiymətindən ucuz') }}</p>
         <p><span>{{ $t('Yeri:') }}</span> {{ car.location }}</p>
         <div class="car-row__actions">
-          <NuxtLink :to="link" class="btn btn--accent car-row__button">{{ $t('Ətraflı') }}</NuxtLink>
+          <NuxtLink :to="$lp(link)" class="btn btn--accent car-row__button">{{ $t('Ətraflı') }}</NuxtLink>
           <a :href="whatsapp" class="car-row__wa" target="_blank" rel="noopener" :aria-label="$t('WhatsApp')" @click="track">
             <i class="bi bi-whatsapp" />
           </a>
