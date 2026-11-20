@@ -7,7 +7,7 @@
 
       <NuxtLink v-else :to="item.to!" class="bottom-nav__link">
         <i :class="['bi', item.icon]" />
-        {{ item.label }}
+        {{ $t(item.label) }}
       </NuxtLink>
     </template>
   </nav>

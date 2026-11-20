@@ -8,16 +8,16 @@
       <nav v-if="mobileMenuOpen" class="mobile-menu">
         <ul class="mobile-menu__list">
           <li v-for="(item, index) in mainNav" :key="item.label" class="mobile-menu__item">
-            <NuxtLink v-if="item.to" :to="item.to" class="mobile-menu__link">{{ item.label }}</NuxtLink>
+            <NuxtLink v-if="item.to" :to="item.to" class="mobile-menu__link">{{ $t(item.label) }}</NuxtLink>
 
             <template v-else>
               <button type="button" class="mobile-menu__link" @click="toggle(index)">
-                {{ item.label }}
+                {{ $t(item.label) }}
                 <i class="bi bi-caret-down-fill mobile-menu__caret" :class="{ 'is-open': openIndex === index }" />
               </button>
               <ul v-show="openIndex === index" class="mobile-menu__sub">
                 <li v-for="child in item.children" :key="child.to">
-                  <NuxtLink :to="child.to" class="mobile-menu__sublink">{{ child.label }}</NuxtLink>
+                  <NuxtLink :to="child.to" class="mobile-menu__sublink">{{ $t(child.label) }}</NuxtLink>
                 </li>
               </ul>
             </template>
@@ -27,11 +27,11 @@
         <div class="mobile-menu__footer">
           <NuxtLink :to="loggedIn ? '/profile' : '/login'" class="mobile-menu__contact">
             <i class="bi bi-person" />
-            {{ loggedIn ? 'Profilim' : 'Daxil ol' }}
+            {{ loggedIn ? $t('Profilim') : $t('Daxil ol') }}
           </NuxtLink>
           <NuxtLink to="/favourite" class="mobile-menu__contact">
             <i class="bi bi-heart" />
-            Seçilmişlər
+            {{ $t('Seçilmişlər') }}
           </NuxtLink>
           <a :href="phoneHref" class="mobile-menu__contact">
             <i class="bi bi-telephone" />

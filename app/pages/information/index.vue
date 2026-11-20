@@ -1,18 +1,18 @@
 <template>
   <div class="container">
     <PageHeader
-      title="Xəbərlər"
-      subtitle="Avtomobil bazarı, idxal qaydaları və GLB yenilikləri."
-      :crumbs="[{ label: 'Xəbərlər' }]"
+      :title="$t('Xəbərlər')"
+      :subtitle="$t('Avtomobil bazarı, idxal qaydaları və GLB yenilikləri.')"
+      :crumbs="[{ label: $t('Xəbərlər') }]"
     />
 
     <div class="card-grid">
       <NuxtLink v-for="item in notifications" :key="item.id" :to="`/information/${item.id}`" class="card news-card">
         <span class="news-card__date"><i class="bi bi-calendar3" /> {{ item.date }}</span>
-        <h2 class="news-card__title">{{ item.title }}</h2>
-        <p class="news-card__text">{{ item.text[0] }}</p>
+        <h2 class="news-card__title">{{ $tr(item, 'title') }}</h2>
+        <p class="news-card__text">{{ $tr(item, 'text')[0] }}</p>
         <span class="link-arrow">
-          Oxu
+          {{ $t('Oxu') }}
           <i class="bi bi-arrow-right" />
         </span>
       </NuxtLink>

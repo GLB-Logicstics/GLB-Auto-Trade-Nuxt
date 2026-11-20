@@ -1,4 +1,4 @@
-import type { BottomNavItem, Language, NavItem, NavLink } from '~/types'
+import type { BottomNavItem, NavItem, NavLink } from '~/types'
 
 export const mainNav: NavItem[] = [
   { label: 'Əsas səhifə', to: '/' },
@@ -64,12 +64,6 @@ export const infoLinks: NavLink[] = [
   { label: 'Risklər barədə xəbərdarlıq', to: '/risks' },
   { label: 'İstifadə şərtləri', to: '/terms' },
   { label: 'Məxfilik siyasəti', to: '/privacy' },
-]
-
-export const languages: Language[] = [
-  { code: 'az', label: 'AZ' },
-  { code: 'en', label: 'EN' },
-  { code: 'ru', label: 'RU' },
 ]
 
 export const bottomNav: BottomNavItem[] = [

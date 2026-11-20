@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <Breadcrumbs :items="[{ label: 'Əsas səhifə', to: '/' }, { label: 'Seçilmişlər' }]" />
+    <Breadcrumbs :items="[{ label: $t('Əsas səhifə'), to: '/' }, { label: $t('Seçilmişlər') }]" />
 
     <template v-if="loggedIn">
-      <h1 class="favourite-page__title">Seçilmişlər ({{ ids.length }})</h1>
+      <h1 class="favourite-page__title">{{ $t('Seçilmişlər') }} ({{ ids.length }})</h1>
 
       <div v-if="ids.length" class="card-grid">
         <AuctionCarCard v-for="lot in favouriteLots" :key="`lot-${lot.id}`" :car="lot" />
@@ -13,24 +13,24 @@
 
       <div v-else class="card empty-state">
         <i class="bi bi-heart" />
-        <h2>Siyahı boşdur</h2>
-        <p>Bəyəndiyiniz avtomobilləri ürək düyməsi ilə seçilmişlərə əlavə edin.</p>
-        <NuxtLink to="/auction-lots" class="btn btn--accent">Hərrac lotlarına bax</NuxtLink>
+        <h2>{{ $t('Siyahı boşdur') }}</h2>
+        <p>{{ $t('Bəyəndiyiniz avtomobilləri ürək düyməsi ilə seçilmişlərə əlavə edin.') }}</p>
+        <NuxtLink to="/auction-lots" class="btn btn--accent">{{ $t('Hərrac lotlarına bax') }}</NuxtLink>
       </div>
     </template>
 
     <div v-else class="card login-required">
       <span class="login-required__icon"><i class="bi bi-lock" /></span>
-      <h1 class="login-required__title">Seçilmişlərə baxmaq üçün daxil olun</h1>
+      <h1 class="login-required__title">{{ $t('Seçilmişlərə baxmaq üçün daxil olun') }}</h1>
       <p class="login-required__text">
-        Bəyəndiyiniz avtomobillər yadda saxlanılıb. Onların siyahısını görmək üçün hesabınıza daxil olun.
+        {{ $t('Bəyəndiyiniz avtomobillər yadda saxlanılıb. Onların siyahısını görmək üçün hesabınıza daxil olun.') }}
       </p>
       <div class="login-required__actions">
         <NuxtLink :to="{ path: '/login', query: { redirect: '/favourite' } }" class="btn btn--accent">
           <i class="bi bi-box-arrow-in-right" />
-          Daxil ol
+          {{ $t('Daxil ol') }}
         </NuxtLink>
-        <NuxtLink to="/auction-lots" class="login-required__link">Hərrac lotlarına bax</NuxtLink>
+        <NuxtLink to="/auction-lots" class="login-required__link">{{ $t('Hərrac lotlarına bax') }}</NuxtLink>
       </div>
     </div>
   </div>

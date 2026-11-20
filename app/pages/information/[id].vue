@@ -1,16 +1,16 @@
 <template>
   <div v-if="news" class="container">
     <PageHeader
-      :title="news.title"
+      :title="$tr(news, 'title')"
       :subtitle="news.date"
-      :crumbs="[{ label: 'Xəbərlər', to: '/information' }, { label: news.title }]"
+      :crumbs="[{ label: $t('Xəbərlər'), to: '/information' }, { label: $tr(news, 'title') }]"
     />
 
     <article class="card news-page">
-      <p v-for="(text, index) in news.text" :key="index">{{ text }}</p>
+      <p v-for="(text, index) in $tr(news, 'text')" :key="index">{{ text }}</p>
       <NuxtLink to="/information" class="link-arrow">
         <i class="bi bi-arrow-left" />
-        Bütün xəbərlər
+        {{ $t('Bütün xəbərlər') }}
       </NuxtLink>
     </article>
   </div>

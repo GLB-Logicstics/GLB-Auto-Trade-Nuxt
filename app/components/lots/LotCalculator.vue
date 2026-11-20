@@ -2,32 +2,32 @@
   <div class="card calculator">
     <h2 class="calculator__title">
       <i class="bi bi-calculator" />
-      Yekun qiyməti hesablayın
+      {{ $t('Yekun qiyməti hesablayın') }}
     </h2>
 
     <div class="calculator__body">
       <form class="calculator__form" @submit.prevent="calculate(lot)">
         <label class="calculator__field">
-          <span>Təklif məbləği (USD)</span>
+          <span>{{ $t('Təklif məbləği (USD)') }}</span>
           <input v-model="bid" type="number" min="0" class="form-input" placeholder="$">
         </label>
 
         <div class="calculator__field">
-          <span>Çatdırılma ölkəsi</span>
+          <span>{{ $t('Çatdırılma ölkəsi') }}</span>
           <BaseSelect v-model="country" :options="countries" :clearable="false" />
         </div>
 
         <div class="calculator__field">
-          <span>Əlavə xərclər</span>
+          <span>{{ $t('Əlavə xərclər') }}</span>
           <label v-for="item in extraCosts" :key="item.id" class="checkbox">
             <input v-model="extras" type="checkbox" :value="item.id">
-            {{ item.label }} (+${{ item.price }})
+            {{ $t(item.label) }} (+${{ item.price }})
           </label>
         </div>
 
         <div class="calculator__buttons">
-          <button type="submit" class="btn btn--accent">Hesabla</button>
-          <button type="button" class="calculator__reset" @click="reset">Sıfırla</button>
+          <button type="submit" class="btn btn--accent">{{ $t('Hesabla') }}</button>
+          <button type="button" class="calculator__reset" @click="reset">{{ $t('Sıfırla') }}</button>
         </div>
       </form>
 

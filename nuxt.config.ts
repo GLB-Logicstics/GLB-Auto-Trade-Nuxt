@@ -36,7 +36,7 @@ export default defineNuxtConfig({
         {
           name: 'description',
           content:
-            'Copart, IAAI və Manheim hərraclarından avtomobil sifarişi, Azərbaycana və Gürcüstana daşınma, gömrük xərclərinin hesablanması — GLB Logistics.',
+              'Copart, IAAI və Manheim hərraclarından avtomobil sifarişi, Azərbaycana və Gürcüstana daşınma, gömrük xərclərinin hesablanması — GLB Logistics.',
         },
         { name: 'theme-color', content: '#00b8fb' },
       ],

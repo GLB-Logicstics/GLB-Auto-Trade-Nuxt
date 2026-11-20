@@ -1,7 +1,7 @@
 <template>
   <div class="filter-group">
     <button type="button" class="filter-group__toggle" :class="{ 'is-open': open }" @click="open = !open">
-      {{ title }}
+      {{ $t(title) }}
       <span v-if="count" class="filter-group__count">{{ count }}</span>
       <i class="bi bi-chevron-down filter-group__chevron" />
     </button>

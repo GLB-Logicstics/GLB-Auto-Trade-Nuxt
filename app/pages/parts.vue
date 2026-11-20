@@ -1,24 +1,24 @@
 <template>
   <div class="container">
     <PageHeader
-      title="Ehtiyat hissələri"
-      subtitle="Marka, model, il və hissə növünə görə axtarın. Tapmadığınız hissəni ABŞ-dan gətiririk."
-      :crumbs="[{ label: 'Ehtiyat hissələri' }]"
+      :title="$t('Ehtiyat hissələri')"
+      :subtitle="$t('Marka, model, il və hissə növünə görə axtarın. Tapmadığınız hissəni ABŞ-dan gətiririk.')"
+      :crumbs="[{ label: $t('Ehtiyat hissələri') }]"
     />
 
     <div class="card parts-page__search">
-      <input v-model="text" type="search" class="form-input parts-page__text" placeholder="Hissənin adı (məs. fara)">
+      <input v-model="text" type="search" class="form-input parts-page__text" :placeholder="$t('Hissənin adı (məs. fara)')">
       <BaseSelect
         :model-value="make"
         :options="makeOptions"
-        placeholder="Marka"
+        :placeholder="$t('Marka')"
         searchable
         @update:model-value="setMake"
       />
-      <BaseSelect v-model="model" :options="modelOptions" :disabled="!make" placeholder="Model" />
-      <BaseSelect v-model="year" :options="years" placeholder="İl" />
-      <BaseSelect v-model="type" :options="typeOptions" placeholder="Hissə növü" />
-      <button type="button" class="btn btn--outline" @click="reset">Təmizlə</button>
+      <BaseSelect v-model="model" :options="modelOptions" :disabled="!make" :placeholder="$t('Model')" />
+      <BaseSelect v-model="year" :options="years" :placeholder="$t('İl')" />
+      <BaseSelect v-model="type" :options="typeOptions" :placeholder="$t('Hissə növü')" />
+      <button type="button" class="btn btn--outline" @click="reset">{{ $t('Təmizlə') }}</button>
     </div>
 
     <div class="parts-page__types">
@@ -31,11 +31,11 @@
         @click="type = type === item.value ? '' : item.value"
       >
         <i :class="['bi', item.icon]" />
-        {{ item.label }}
+        {{ $t(item.label) }}
       </button>
     </div>
 
-    <p class="parts-page__count">{{ filteredParts.length }} hissə tapıldı</p>
+    <p class="parts-page__count">{{ $t('{count} hissə tapıldı', { count: filteredParts.length }) }}</p>
 
     <div v-if="filteredParts.length" class="card-grid">
       <PartCard v-for="part in filteredParts" :key="part.id" :part="part" />
@@ -43,15 +43,15 @@
 
     <div v-else class="card empty-state">
       <i class="bi bi-search" />
-      <h2>Hissə tapılmadı</h2>
-      <p>Aşağıdakı formu doldurun — hissəni ABŞ-dan tapıb gətirək.</p>
+      <h2>{{ $t('Hissə tapılmadı') }}</h2>
+      <p>{{ $t('Aşağıdakı formu doldurun — hissəni ABŞ-dan tapıb gətirək.') }}</p>
     </div>
 
     <RequestForm
       class="parts-page__request"
-      title="Hissəni tapmadınız? Sorğu göndərin"
+      :title="$t('Hissəni tapmadınız? Sorğu göndərin')"
       subject="Ehtiyat hissəsi sorğusu"
-      placeholder="Marka, model, il və lazım olan hissə"
+      :placeholder="$t('Marka, model, il və lazım olan hissə')"
     />
   </div>
 </template>
@@ -66,9 +66,10 @@ export default defineComponent({
   name: 'PartsPage',
 
   setup() {
+    const t = useNuxtApp().$t
     useSeoMeta({
-      title: 'Ehtiyat hissələri — GLB Logistics',
-      description: 'Avtomobil ehtiyat hissələrinin axtarışı və ABŞ-dan sifarişi: marka, model, il və hissə növü üzrə.',
+      title: () => t('Ehtiyat hissələri — GLB Logistics'),
+      description: () => t('Avtomobil ehtiyat hissələrinin axtarışı və ABŞ-dan sifarişi: marka, model, il və hissə növü üzrə.'),
     })
   },
 

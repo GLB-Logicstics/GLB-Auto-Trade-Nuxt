@@ -3,7 +3,7 @@
     type="button"
     class="fav-btn"
     :class="{ 'is-active': active }"
-    :aria-label="active ? 'Seçilmişlərdən çıxar' : 'Seçilmişlərə əlavə et'"
+    :aria-label="active ? $t('Seçilmişlərdən çıxar') : $t('Seçilmişlərə əlavə et')"
     @click.prevent="toggle(id)"
   >
     <i :class="['bi', active ? 'bi-heart-fill' : 'bi-heart']" />

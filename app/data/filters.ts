@@ -1,9 +1,4 @@
-import type { Make, Option, PartType, SaleStatus } from '~/types'
-
-export const makes: Make[] = [
-  { name: 'BMW', models: ['X5', 'X3', '330I'] },
-  { name: 'HYUNDAI', models: ['TUCSON', 'SANTA FE', 'ELANTRA', 'IONIQ'] },
-]
+import type { Option, SaleStatus } from '~/types'
 
 export const saleStatuses: Record<string, SaleStatus> = {
   minBid: { label: 'Minimum təklif əsasında', reserve: 'Rezerv var (məbləğ açıqlanmır)', color: '#16202c', icon: 'bi-hammer' },
@@ -40,19 +35,6 @@ export const countries: Option[] = [
   { label: 'Gürcüstan', value: 'geo' },
 ]
 
-export const cities: Record<string, Option[]> = {
-  aze: [
-    { label: 'Bakı', value: 'Bakı' },
-    { label: 'Gəncə', value: 'Gəncə' },
-    { label: 'Sumqayıt', value: 'Sumqayıt' },
-  ],
-  geo: [
-    { label: 'Tbilisi', value: 'Tbilisi' },
-    { label: 'Batumi', value: 'Batumi' },
-    { label: 'Poti', value: 'Poti' },
-  ],
-}
-
 export const addedOptions: Option[] = [
   { label: 'Son 24 saat', value: '1' },
   { label: 'Son 30 gün', value: '30' },
@@ -70,14 +52,3 @@ export const years: Option[] = []
 for (let year = 2026; year >= 2010; year--) {
   years.push({ label: String(year), value: String(year) })
 }
-
-export const partTypes: PartType[] = [
-  { label: 'Mühərrik', value: 'engine', icon: 'bi-gear-wide-connected' },
-  { label: 'Kuzov hissələri', value: 'body', icon: 'bi-car-front' },
-  { label: 'Optika', value: 'lights', icon: 'bi-lightbulb' },
-  { label: 'Asma', value: 'suspension', icon: 'bi-bezier2' },
-  { label: 'Əyləc sistemi', value: 'brakes', icon: 'bi-disc' },
-  { label: 'Elektrik', value: 'electric', icon: 'bi-lightning-charge' },
-  { label: 'Salon', value: 'interior', icon: 'bi-grid-3x3-gap' },
-  { label: 'Təkər və disk', value: 'wheels', icon: 'bi-circle' },
-]

@@ -4,7 +4,7 @@
       type="button"
       class="notifications__toggle"
       :class="{ 'is-open': open }"
-      aria-label="Bildirişlər"
+      :aria-label="$t('Bildirişlər')"
       @click="open = !open"
     >
       <i :class="['bi', open ? 'bi-bell-fill' : 'bi-bell']" />
@@ -13,7 +13,7 @@
 
     <Transition name="dropdown">
       <div v-if="open" class="notifications__panel">
-        <p class="notifications__title">Bildirişlər</p>
+        <p class="notifications__title">{{ $t('Bildirişlər') }}</p>
 
         <ul class="notifications__list">
           <li v-for="item in notifications" :key="item.id">
@@ -22,7 +22,7 @@
                 <i class="bi bi-newspaper" />
               </span>
               <span class="notifications__text">
-                <span class="notifications__item-title">{{ item.title }}</span>
+                <span class="notifications__item-title">{{ $tr(item, 'title') }}</span>
                 <span class="notifications__date">{{ item.date }}</span>
               </span>
             </NuxtLink>
@@ -30,7 +30,7 @@
         </ul>
 
         <NuxtLink to="/information" class="notifications__all" @click="close">
-          Bütün xəbərlər
+          {{ $t('Bütün xəbərlər') }}
           <i class="bi bi-arrow-right" />
         </NuxtLink>
       </div>

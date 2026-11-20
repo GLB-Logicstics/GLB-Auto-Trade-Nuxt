@@ -25,10 +25,11 @@ export default defineComponent({
   name: 'HomePage',
 
   setup() {
+    const t = useNuxtApp().$t
     useSeoMeta({
-      title: 'GLB Logistics — Amerikadan avtomobil sifarişi və daşınması',
-      description:
-        'Copart, IAAI və Manheim hərraclarından avtomobil sifarişi, Azərbaycana və Gürcüstana daşınma, gömrük xərclərinin hesablanması.',
+      title: () => t('GLB Logistics — Amerikadan avtomobil sifarişi və daşınması'),
+      description: () =>
+        t('Copart, IAAI və Manheim hərraclarından avtomobil sifarişi, Azərbaycana və Gürcüstana daşınma, gömrük xərclərinin hesablanması.'),
     })
   },
 

@@ -1,6 +1,6 @@
 <template>
   <nav v-if="totalPages > 1" class="pagination">
-    <button type="button" class="pagination__button" :disabled="page === 1" aria-label="Əvvəlki" @click="go(page - 1)">
+    <button type="button" class="pagination__button" :disabled="page === 1" :aria-label="$t('Əvvəlki')" @click="go(page - 1)">
       <i class="bi bi-chevron-left" />
     </button>
 
@@ -19,7 +19,7 @@
       type="button"
       class="pagination__button"
       :disabled="page === totalPages"
-      aria-label="Növbəti"
+      :aria-label="$t('Növbəti')"
       @click="go(page + 1)"
     >
       <i class="bi bi-chevron-right" />

@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
-import { bottomNav, footerLinks, infoLinks, languages, mainNav } from '~/data/site'
-import type { Notification, SiteInfo, SocialLink } from '~/types'
+import { useI18nStore } from '~/stores/i18n'
+import { bottomNav, footerLinks, infoLinks, mainNav } from '~/data/site'
+import type { Notification, Option, SiteInfo, SocialLink } from '~/types'
 
 function emptySiteInfo(): SiteInfo {
   return {
@@ -19,17 +20,19 @@ export const useSiteStore = defineStore('site', {
     footerLinks,
     infoLinks,
     socialLinks: [] as SocialLink[],
-    languages,
     bottomNav,
     notifications: [] as Notification[],
+    locations: {} as Record<string, string[]>,
   }),
 
   getters: {
     contact: (state) => state.info.contact,
+    cityOptions: (state) => (country: string): Option[] =>
+      (state.locations[country] || []).map((city) => ({ label: city, value: city })),
     phoneHref: (state) => `tel:${state.info.contact.phone}`,
     emailHref: (state) => `mailto:${state.info.contact.email}`,
     whatsappHref: (state) => (text: string) => `${state.info.contact.whatsapp}?text=${encodeURIComponent(text)}`,
     newsById: (state) => (id: number) => state.notifications.find((item) => item.id === id),
-    copyright: (state) => `© ${new Date().getFullYear()} ${state.info.name}. Bütün hüquqlar qorunur.`,
+    copyright: (state) => `© ${new Date().getFullYear()} ${state.info.name}. ${useI18nStore().t('Bütün hüquqlar qorunur.')}`,
   },
 })

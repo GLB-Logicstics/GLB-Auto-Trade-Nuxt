@@ -19,7 +19,7 @@
 
       <span class="auction-card__status" :style="{ backgroundColor: status.color }">
         <i :class="['bi', status.icon]" />
-        {{ status.label }}
+        {{ $t(status.label) }}
       </span>
 
       <FavouriteButton :id="`lot-${car.id}`" class="auction-card__fav" />
@@ -32,34 +32,34 @@
 
       <ul class="auction-card__specs">
         <li>
-          <span><i class="bi bi-bank" /> Auksion:</span>
+          <span><i class="bi bi-bank" /> {{ $t('Auksion:') }}</span>
           <strong>{{ car.auction }}</strong>
         </li>
         <li>
-          <span><i class="bi bi-speedometer2" /> Yürüş:</span>
+          <span><i class="bi bi-speedometer2" /> {{ $t('Yürüş:') }}</span>
           <strong>{{ formatMiles(car.odometer, car.odometerType) }}</strong>
         </li>
         <li>
-          <span><i class="bi bi-exclamation-triangle" /> Əsas zədə:</span>
+          <span><i class="bi bi-exclamation-triangle" /> {{ $t('Əsas zədə:') }}</span>
           <strong>{{ car.primaryDamage }}</strong>
         </li>
         <li>
-          <span><i class="bi bi-exclamation-diamond" /> Əlavə zədə:</span>
+          <span><i class="bi bi-exclamation-diamond" /> {{ $t('Əlavə zədə:') }}</span>
           <strong>{{ car.secondaryDamage }}</strong>
         </li>
         <li>
-          <span><i class="bi bi-calendar-event" /> Hərrac tarixi:</span>
+          <span><i class="bi bi-calendar-event" /> {{ $t('Hərrac tarixi:') }}</span>
           <strong>{{ formatDate(car.saleDate) }}</strong>
         </li>
       </ul>
 
       <div class="auction-card__footer">
         <p class="auction-card__price">
-          İndi al:
-          <strong>{{ car.buyNowPrice ? formatUsd(car.buyNowPrice) : 'Təklif ilə' }}</strong>
+          {{ $t('İndi al:') }}
+          <strong>{{ car.buyNowPrice ? formatUsd(car.buyNowPrice) : $t('Təklif ilə') }}</strong>
         </p>
         <NuxtLink :to="link" class="link-arrow">
-          Ətraflı bax
+          {{ $t('Ətraflı bax') }}
           <i class="bi bi-arrow-up-right" />
         </NuxtLink>
       </div>

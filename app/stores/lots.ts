@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useI18nStore } from '~/stores/i18n'
 import type { Lot, LotFilters, Option, PricePoint } from '~/types'
 
 export const LIST_KEYS = [
@@ -204,10 +205,10 @@ export const useLotsStore = defineStore('lots', {
     },
 
     rangeText(): string {
-      if (!this.total) return '0 nəticə'
+      if (!this.total) return useI18nStore().t('0 nəticə')
       const start = (this.page - 1) * this.perPage + 1
       const end = Math.min(this.page * this.perPage, this.total)
-      return `${start}-${end} / ${this.total} nəticə göstərilir`
+      return useI18nStore().t('{start}-{end} / {total} nəticə göstərilir', { start, end, total: this.total })
     },
 
     optionsOf: (state) => (key: ListKey): Option[] => {

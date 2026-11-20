@@ -4,7 +4,6 @@ export const useUiStore = defineStore('ui', {
   state: () => ({
     mobileMenuOpen: false,
     searchOpen: false,
-    language: 'az',
   }),
 
   actions: {
@@ -24,10 +23,6 @@ export const useUiStore = defineStore('ui', {
     closeAll() {
       this.mobileMenuOpen = false
       this.searchOpen = false
-    },
-
-    setLanguage(code: string) {
-      this.language = code
     },
   },
 })

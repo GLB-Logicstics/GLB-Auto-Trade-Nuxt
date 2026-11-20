@@ -1,8 +1,8 @@
 <template>
   <nav class="breadcrumbs">
     <template v-for="(item, index) in items" :key="index">
-      <NuxtLink v-if="item.to" :to="item.to" class="breadcrumbs__link">{{ item.label }}</NuxtLink>
-      <span v-else class="breadcrumbs__current">{{ item.label }}</span>
+      <NuxtLink v-if="item.to" :to="item.to" class="breadcrumbs__link">{{ $t(item.label) }}</NuxtLink>
+      <span v-else class="breadcrumbs__current">{{ $t(item.label) }}</span>
       <span v-if="index < items.length - 1" class="breadcrumbs__divider">/</span>
     </template>
   </nav>

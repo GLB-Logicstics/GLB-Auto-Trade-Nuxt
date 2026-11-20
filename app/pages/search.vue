@@ -6,14 +6,14 @@
       <div v-if="filtersOpen" class="search-page__backdrop" @click="filtersOpen = false" />
 
       <aside class="card search-page__sidebar" :class="{ 'is-open': filtersOpen }">
-        <button type="button" class="search-page__close" aria-label="Bağla" @click="filtersOpen = false">
+        <button type="button" class="search-page__close" :aria-label="$t('Bağla')" @click="filtersOpen = false">
           <i class="bi bi-x-lg" />
         </button>
 
         <CarFilters />
 
         <button type="button" class="btn btn--accent search-page__apply" @click="filtersOpen = false">
-          {{ total }} nəticəni göstər
+          {{ $t('{count} nəticəni göstər', { count: total }) }}
         </button>
       </aside>
 
@@ -21,14 +21,14 @@
         <div class="card search-page__toolbar">
           <button type="button" class="search-page__filter-button" @click="filtersOpen = true">
             <i class="bi bi-sliders" />
-            Filtrlər
+            {{ $t('Filtrlər') }}
             <span v-if="activeCount" class="search-page__filter-count">{{ activeCount }}</span>
           </button>
 
           <p class="search-page__range">{{ rangeText }}</p>
 
           <div class="search-page__sort">
-            <span>Sırala:</span>
+            <span>{{ $t('Sırala:') }}</span>
             <BaseSelect
                 :model-value="sort"
                 :options="sortOptions"
@@ -39,7 +39,7 @@
             <button
                 type="button"
                 class="search-page__order"
-                :aria-label="order === 'asc' ? 'Artan' : 'Azalan'"
+                :aria-label="order === 'asc' ? $t('Artan') : $t('Azalan')"
                 @click="toggleOrder"
             >
               <i :class="['bi', order === 'asc' ? 'bi-sort-down-alt' : 'bi-sort-down']" />
@@ -54,9 +54,9 @@
 
         <div v-else class="card search-page__empty">
           <i class="bi bi-search" />
-          <h2>Nəticə tapılmadı</h2>
-          <p>Seçdiyiniz filtrlərə uyğun avtomobil yoxdur.</p>
-          <button type="button" class="btn btn--accent" @click="resetFilters">Filtrləri təmizlə</button>
+          <h2>{{ $t('Nəticə tapılmadı') }}</h2>
+          <p>{{ $t('Seçdiyiniz filtrlərə uyğun avtomobil yoxdur.') }}</p>
+          <button type="button" class="btn btn--accent" @click="resetFilters">{{ $t('Filtrləri təmizlə') }}</button>
         </div>
       </div>
     </div>
@@ -73,9 +73,10 @@ export default defineComponent({
   name: 'SearchPage',
 
   setup() {
+    const t = useNuxtApp().$t
     useSeoMeta({
-      title: 'Satışda olan avtomobillər — GLB Logistics',
-      description: 'Azərbaycanda və Gürcüstanda satışda olan hazır avtomobillər. Ölkə, şəhər, marka, il və qiymətə görə filtr.',
+      title: () => t('Satışda olan avtomobillər — GLB Logistics'),
+      description: () => t('Azərbaycanda və Gürcüstanda satışda olan hazır avtomobillər. Ölkə, şəhər, marka, il və qiymətə görə filtr.'),
     })
   },
 
@@ -105,7 +106,7 @@ export default defineComponent({
     },
 
     breadcrumbs() {
-      const title = this.countryLabel ? `${this.countryLabel} — satışda olan avtomobillər` : 'Axtarış nəticələri'
+      const title = this.countryLabel ? this.$t('{country} — satışda olan avtomobillər', { country: this.$t(this.countryLabel) }) : this.$t('Axtarış nəticələri')
       return [{ label: 'Əsas səhifə', to: '/' }, { label: title }]
     },
   },

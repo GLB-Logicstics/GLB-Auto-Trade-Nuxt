@@ -1,81 +1,88 @@
 <template>
   <div class="container">
     <PageHeader
-      title="Diler və partnyorlar üçün"
-      subtitle="Hazır avtomobillərinizi, xidmətlərinizi və ehtiyat hissələrinizi platformada təqdim edin, yeni müştərilər qazanın."
-      :crumbs="[{ label: 'Diler ol' }]"
+      :title="$t('Diler və partnyorlar üçün')"
+      :subtitle="$t('Hazır avtomobillərinizi, xidmətlərinizi və ehtiyat hissələrinizi platformada təqdim edin, yeni müştərilər qazanın.')"
+      :crumbs="[{ label: $t('Diler ol') }]"
     />
 
     <div class="dealers-page__benefits">
       <div v-for="item in benefits" :key="item.title" class="card dealers-page__benefit">
         <i :class="['bi', item.icon]" />
-        <h3>{{ item.title }}</h3>
-        <p>{{ item.text }}</p>
+        <h3>{{ $t(item.title) }}</h3>
+        <p>{{ $t(item.text) }}</p>
       </div>
+    </div>
+
+    <div class="card dealers-page__cabinet">
+      <p>{{ $t('Diler kimi qeydiyyatdan keçin — təsdiqdən sonra avtomobillərinizi özünüz əlavə edib klikləri izləyəcəksiniz.') }}</p>
+      <NuxtLink :to="dealerApproved ? '/cabinet' : '/register'" class="btn btn--accent">
+        {{ dealerApproved ? $t('Diler kabineti') : $t('Diler kimi qeydiyyat') }}
+      </NuxtLink>
     </div>
 
     <div class="card">
       <h2 class="panel__title">
         <i class="bi bi-briefcase" />
-        Qoşulmaq üçün müraciət
+        {{ $t('Qoşulmaq üçün müraciət') }}
       </h2>
 
       <div class="panel__body">
         <p v-if="sent" class="form-success">
           <i class="bi bi-check-circle" />
-          Müraciətiniz qəbul edildi. Partnyorluq üzrə menecerimiz sizinlə əlaqə saxlayacaq.
+          {{ $t('Müraciətiniz qəbul edildi. Partnyorluq üzrə menecerimiz sizinlə əlaqə saxlayacaq.') }}
         </p>
 
         <form v-else class="dealers-page__form" novalidate @submit.prevent="submit">
           <div class="form-grid">
             <label class="form-field" :class="{ 'has-error': errors.company }">
-              <span>Şirkətin adı *</span>
+              <span>{{ $t('Şirkətin adı *') }}</span>
               <input v-model.trim="form.company" type="text" class="form-input">
-              <small v-if="errors.company" class="form-error">{{ errors.company }}</small>
+              <small v-if="errors.company" class="form-error">{{ $t(errors.company) }}</small>
             </label>
 
             <label class="form-field" :class="{ 'has-error': errors.name }">
-              <span>Əlaqədar şəxs *</span>
+              <span>{{ $t('Əlaqədar şəxs *') }}</span>
               <input v-model.trim="form.name" type="text" class="form-input">
-              <small v-if="errors.name" class="form-error">{{ errors.name }}</small>
+              <small v-if="errors.name" class="form-error">{{ $t(errors.name) }}</small>
             </label>
 
             <label class="form-field" :class="{ 'has-error': errors.phone }">
-              <span>Telefon *</span>
+              <span>{{ $t('Telefon *') }}</span>
               <input v-model.trim="form.phone" type="tel" class="form-input" placeholder="+994 50 000 00 00">
-              <small v-if="errors.phone" class="form-error">{{ errors.phone }}</small>
+              <small v-if="errors.phone" class="form-error">{{ $t(errors.phone) }}</small>
             </label>
 
             <label class="form-field">
-              <span>E-poçt</span>
+              <span>{{ $t('E-poçt') }}</span>
               <input v-model.trim="form.email" type="email" class="form-input">
             </label>
 
             <div class="form-field">
-              <span>Ölkə</span>
+              <span>{{ $t('Ölkə') }}</span>
               <BaseSelect v-model="form.country" :options="countries" :clearable="false" />
             </div>
 
             <div class="form-field">
-              <span>Fəaliyyət növü</span>
+              <span>{{ $t('Fəaliyyət növü') }}</span>
               <BaseSelect v-model="form.type" :options="types" :clearable="false" />
             </div>
 
             <label class="form-field is-wide">
-              <span>Əlavə məlumat</span>
+              <span>{{ $t('Əlavə məlumat') }}</span>
               <textarea
                 v-model.trim="form.message"
                 class="form-input form-textarea"
-                placeholder="Stok sayı, şəhər, xidmətlər"
+                :placeholder="$t('Stok sayı, şəhər, xidmətlər')"
               />
             </label>
           </div>
 
-          <p v-if="failed" class="form-error">Müraciət göndərilmədi. Bir az sonra yenidən cəhd edin.</p>
+          <p v-if="failed" class="form-error">{{ $t('Müraciət göndərilmədi. Bir az sonra yenidən cəhd edin.') }}</p>
 
           <button type="submit" class="btn btn--accent" :disabled="sending">
             <i class="bi bi-send" />
-            {{ sending ? 'Göndərilir...' : 'Müraciət göndər' }}
+            {{ sending ? $t('Göndərilir...') : $t('Müraciət göndər') }}
           </button>
         </form>
       </div>
@@ -85,17 +92,19 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { mapActions } from 'pinia'
+import { mapActions, mapState } from 'pinia'
 import { countries } from '~/data/filters'
+import { useAuthStore } from '~/stores/auth'
 import { useRequestsStore } from '~/stores/requests'
 
 export default defineComponent({
   name: 'DealersPage',
 
   setup() {
+    const t = useNuxtApp().$t
     useSeoMeta({
-      title: 'Diler ol — GLB Logistics',
-      description: 'Dilerlər, servislər və ehtiyat hissəsi satıcıları üçün GLB platformasına qoşulma.',
+      title: () => t('Diler ol — GLB Logistics'),
+      description: () => t('Dilerlər, servislər və ehtiyat hissəsi satıcıları üçün GLB platformasına qoşulma.'),
     })
   },
 
@@ -125,6 +134,10 @@ export default defineComponent({
     }
   },
 
+  computed: {
+    ...mapState(useAuthStore, ['dealerApproved']),
+  },
+
   methods: {
     ...mapActions(useRequestsStore, ['send']),
 
@@ -150,6 +163,22 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.dealers-page__cabinet {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  margin-bottom: 20px;
+
+  p {
+    max-width: 640px;
+    font-size: 0.9375rem;
+    color: $text;
+  }
+}
+
 .dealers-page {
   &__benefits {
     display: grid;

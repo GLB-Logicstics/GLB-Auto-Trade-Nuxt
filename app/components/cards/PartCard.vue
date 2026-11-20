@@ -8,7 +8,7 @@
       <p class="part-card__fit">{{ part.make }} {{ part.model }} · {{ part.yearFrom }}–{{ part.yearTo }}</p>
 
       <div class="part-card__meta">
-        <span :class="{ 'is-new': part.condition === 'Yeni' }">{{ part.condition }}</span>
+        <span :class="{ 'is-new': part.condition === 'Yeni' }">{{ $t(part.condition) }}</span>
         <span><i class="bi bi-geo-alt" /> {{ part.location }}</span>
       </div>
 
@@ -16,7 +16,7 @@
         <strong>{{ formatUsd(part.price) }}</strong>
         <a :href="whatsapp" class="btn btn--whatsapp btn--sm" target="_blank" rel="noopener">
           <i class="bi bi-whatsapp" />
-          Sorğu
+          {{ $t('Sorğu') }}
         </a>
       </div>
     </div>

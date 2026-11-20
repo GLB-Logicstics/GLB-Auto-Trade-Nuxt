@@ -5,7 +5,7 @@
         <NuxtLink to="/" class="app-footer__logo" :aria-label="info.name">
           <img :src="$asset(info.logoDark)" :alt="info.name" width="361" height="160" loading="lazy">
         </NuxtLink>
-        <p class="app-footer__about">{{ info.about }}</p>
+        <p class="app-footer__about">{{ $tr(info, 'about') }}</p>
         <div class="app-footer__socials">
           <a
             v-for="social in socialLinks"
@@ -20,33 +20,33 @@
       </div>
 
       <nav class="app-footer__col">
-        <h3 class="app-footer__title">Faydalı Linklər</h3>
+        <h3 class="app-footer__title">{{ $t('Faydalı Linklər') }}</h3>
         <ul class="app-footer__links">
           <li v-for="link in footerLinks" :key="link.to">
-            <NuxtLink :to="link.to" class="app-footer__link">{{ link.label }}</NuxtLink>
+            <NuxtLink :to="link.to" class="app-footer__link">{{ $t(link.label) }}</NuxtLink>
           </li>
         </ul>
       </nav>
 
       <nav class="app-footer__col">
-        <h3 class="app-footer__title">Məlumat</h3>
+        <h3 class="app-footer__title">{{ $t('Məlumat') }}</h3>
         <ul class="app-footer__links">
           <li v-for="link in infoLinks" :key="link.to">
-            <NuxtLink :to="link.to" class="app-footer__link">{{ link.label }}</NuxtLink>
+            <NuxtLink :to="link.to" class="app-footer__link">{{ $t(link.label) }}</NuxtLink>
           </li>
         </ul>
       </nav>
 
       <div class="app-footer__col">
-        <h3 class="app-footer__title">Bizimlə Əlaqə</h3>
+        <h3 class="app-footer__title">{{ $t('Bizimlə Əlaqə') }}</h3>
         <ul class="app-footer__contacts">
           <li>
             <i class="bi bi-geo-alt-fill" />
-            <span>{{ contact.address }}</span>
+            <span>{{ $tr(contact, 'address') }}</span>
           </li>
           <li>
             <i class="bi bi-clock-fill" />
-            <span>{{ contact.workingHours }}</span>
+            <span>{{ $tr(contact, 'workingHours') }}</span>
           </li>
           <li>
             <i class="bi bi-telephone-fill" />

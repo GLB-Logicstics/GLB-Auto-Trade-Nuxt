@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
-import { makes, partTypes } from '~/data/filters'
-import type { Option, Part, PartType } from '~/types'
+import { collectMakes } from '~/utils/makes'
+import type { Make, Option, Part, PartType } from '~/types'
 
 export const usePartsStore = defineStore('parts', {
   state: () => ({
     items: [] as Part[],
-    types: partTypes,
+    types: [] as PartType[],
     text: '',
     make: '',
     model: '',
@@ -14,10 +14,14 @@ export const usePartsStore = defineStore('parts', {
   }),
 
   getters: {
-    makeOptions: (): Option[] => makes.map((make) => ({ label: make.name, value: make.name })),
+    makes: (state): Make[] => collectMakes(state.items),
+
+    makeOptions(): Option[] {
+      return this.makes.map((make) => ({ label: make.name, value: make.name }))
+    },
 
     modelOptions(state): Option[] {
-      const make = makes.find((item) => item.name === state.make)
+      const make = this.makes.find((item) => item.name === state.make)
       return make ? make.models.map((model) => ({ label: model, value: model })) : []
     },
 

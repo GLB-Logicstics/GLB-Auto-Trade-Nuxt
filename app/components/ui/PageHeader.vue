@@ -1,8 +1,8 @@
 <template>
   <div class="page-header">
-    <Breadcrumbs :items="[{ label: 'Əsas səhifə', to: '/' }, ...crumbs]" />
-    <h1 class="page-header__title">{{ title }}</h1>
-    <p v-if="subtitle" class="page-header__subtitle">{{ subtitle }}</p>
+    <Breadcrumbs :items="[{ label: $t('Əsas səhifə'), to: '/' }, ...crumbs]" />
+    <h1 class="page-header__title">{{ $t(title) }}</h1>
+    <p v-if="subtitle" class="page-header__subtitle">{{ $t(subtitle) }}</p>
   </div>
 </template>
 

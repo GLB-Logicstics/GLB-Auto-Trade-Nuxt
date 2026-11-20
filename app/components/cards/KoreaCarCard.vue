@@ -24,26 +24,26 @@
 
       <dl class="korea-card__prices">
         <div>
-          <dt>Koreyada qiymət</dt>
+          <dt>{{ $t('Koreyada qiymət') }}</dt>
           <dd>{{ formatUsd(car.price) }}</dd>
         </div>
         <div>
-          <dt>Çatdırılma ({{ countryLabel }})</dt>
+          <dt>{{ $t('Çatdırılma') }} ({{ $t(countryLabel) }})</dt>
           <dd>{{ formatUsd(price.shipping) }}</dd>
         </div>
         <div>
-          <dt>Gömrük (təxmini)</dt>
+          <dt>{{ $t('Gömrük (təxmini)') }}</dt>
           <dd>{{ formatUsd(price.customs) }}</dd>
         </div>
         <div class="korea-card__total">
-          <dt>Yekun</dt>
+          <dt>{{ $t('Yekun') }}</dt>
           <dd>{{ formatUsd(price.total) }}</dd>
         </div>
       </dl>
 
       <a :href="whatsapp" class="btn btn--whatsapp btn--sm" target="_blank" rel="noopener">
         <i class="bi bi-whatsapp" />
-        Sorğu göndər
+        {{ $t('Sorğu göndər') }}
       </a>
     </div>
   </article>

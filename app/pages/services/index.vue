@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <PageHeader
-      title="Xidmətlərimiz"
-      subtitle="Hərracdan alışdan ehtiyat hissələrinə qədər — avtomobillə bağlı bütün işləri bir yerdən həll edin."
-      :crumbs="[{ label: 'Xidmətlər' }]"
+      :title="$t('Xidmətlərimiz')"
+      :subtitle="$t('Hərracdan alışdan ehtiyat hissələrinə qədər — avtomobillə bağlı bütün işləri bir yerdən həll edin.')"
+      :crumbs="[{ label: $t('Xidmətlər') }]"
     />
 
     <div class="services-page__grid">
@@ -21,9 +21,10 @@ export default defineComponent({
   name: 'ServicesPage',
 
   setup() {
+    const t = useNuxtApp().$t
     useSeoMeta({
-      title: 'Xidmətlər — GLB Logistics',
-      description: 'Avtomobil auksionu və gətirilməsi, daşınma, sökülmə və ABŞ-dan ehtiyat hissələrinin gətirilməsi.',
+      title: () => t('Xidmətlər — GLB Logistics'),
+      description: () => t('Avtomobil auksionu və gətirilməsi, daşınma, sökülmə və ABŞ-dan ehtiyat hissələrinin gətirilməsi.'),
     })
   },
 

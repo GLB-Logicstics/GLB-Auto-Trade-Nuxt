@@ -5,29 +5,29 @@
         <BaseSelect
           :model-value="make"
           :options="makeOptions"
-          placeholder="Marka seçin"
+          :placeholder="$t('Marka seçin')"
           searchable
           @update:model-value="setMake"
         />
-        <BaseSelect v-model="model" :options="modelOptions" :disabled="!make" placeholder="Model seçin" searchable />
-        <BaseSelect v-model="place" :options="places" :clearable="false" placeholder="Yer" />
+        <BaseSelect v-model="model" :options="modelOptions" :disabled="!make" :placeholder="$t('Model seçin')" searchable />
+        <BaseSelect v-model="place" :options="places" :clearable="false" :placeholder="$t('Yer')" />
         <BaseSelect
           v-model="auction"
           :options="auctions"
           :disabled="place !== 'auction'"
-          placeholder="Bütün auksionlar"
+          :placeholder="$t('Bütün auksionlar')"
         />
         <BaseSelect
           :model-value="yearFrom"
           :options="years"
           :disabled="!make"
-          placeholder="İl (min.)"
+          :placeholder="$t('İl (min.)')"
           @update:model-value="setYearFrom"
         />
-        <BaseSelect v-model="yearTo" :options="yearToOptions" :disabled="!make" placeholder="İl (maks.)" />
+        <BaseSelect v-model="yearTo" :options="yearToOptions" :disabled="!make" :placeholder="$t('İl (maks.)')" />
         <button type="submit" class="btn btn--accent search-filter__submit">
           <i class="bi bi-search" />
-          Axtar
+          {{ $t('Axtar') }}
         </button>
       </form>
     </div>

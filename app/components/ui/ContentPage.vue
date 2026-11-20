@@ -1,10 +1,10 @@
 <template>
   <div v-if="page" class="container content-page">
-    <PageHeader :title="page.title" :subtitle="page.subtitle" :crumbs="[{ label: page.title }]" />
+    <PageHeader :title="$tr(page, 'title')" :subtitle="$tr(page, 'subtitle')" :crumbs="[{ label: $tr(page, 'title') }]" />
 
     <div class="content-page__layout">
       <div class="card content-page__body">
-        <section v-for="section in page.sections" :key="section.title" class="content-page__section">
+        <section v-for="section in $tr(page, 'sections')" :key="section.title" class="content-page__section">
           <h2>{{ section.title }}</h2>
           <p v-for="(text, index) in section.text" :key="index">{{ text }}</p>
         </section>
@@ -13,20 +13,20 @@
       <aside class="card content-page__aside">
         <h2 class="panel__title">
           <i class="bi bi-headset" />
-          Sualınız var?
+          {{ $t('Sualınız var?') }}
         </h2>
         <div class="panel__body">
-          <p>Mütəxəssislərimiz iş saatlarında sizə kömək etməyə hazırdır.</p>
+          <p>{{ $t('Mütəxəssislərimiz iş saatlarında sizə kömək etməyə hazırdır.') }}</p>
           <a :href="phoneHref" class="btn btn--accent btn--sm">
             <i class="bi bi-telephone" />
             {{ contact.phoneDisplay }}
           </a>
           <a :href="contact.whatsapp" class="btn btn--whatsapp btn--sm" target="_blank" rel="noopener">
             <i class="bi bi-whatsapp" />
-            WhatsApp
+            {{ $t('WhatsApp') }}
           </a>
           <NuxtLink to="/contact" class="link-arrow">
-            Əlaqə səhifəsi
+            {{ $t('Əlaqə səhifəsi') }}
             <i class="bi bi-arrow-right" />
           </NuxtLink>
         </div>
@@ -51,8 +51,9 @@ export default defineComponent({
 
   setup(props) {
     const page = useContentStore().pageBySlug(props.slug)
+    const t = useNuxtApp().$t
     useSeoMeta({
-      title: `${page ? page.title : 'Səhifə'} — GLB Logistics`,
+      title: () => t('{0} — GLB Logistics', { 0: page ? page.title : 'Səhifə' }),
       description: page ? page.subtitle : '',
     })
   },

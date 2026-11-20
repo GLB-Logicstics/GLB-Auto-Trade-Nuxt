@@ -1,6 +1,6 @@
 <template>
   <div class="ui-slider" :class="[`ui-slider--${variant}`, { 'is-ready': ready }]">
-    <button v-if="navigation" ref="prev" type="button" class="slider-arrow ui-slider__prev" aria-label="Əvvəlki">
+    <button v-if="navigation" ref="prev" type="button" class="slider-arrow ui-slider__prev" :aria-label="$t('Əvvəlki')">
       <i class="bi bi-chevron-left" />
     </button>
 
@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <button v-if="navigation" ref="next" type="button" class="slider-arrow ui-slider__next" aria-label="Növbəti">
+    <button v-if="navigation" ref="next" type="button" class="slider-arrow ui-slider__next" :aria-label="$t('Növbəti')">
       <i class="bi bi-chevron-right" />
     </button>
 

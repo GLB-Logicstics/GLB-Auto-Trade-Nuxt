@@ -13,7 +13,7 @@
         >
       </NuxtLink>
 
-      <span class="local-card__status">{{ car.sold ? 'Satılıb' : 'Satılır' }}</span>
+      <span class="local-card__status">{{ car.sold ? $t('Satılıb') : $t('Satılır') }}</span>
 
       <FavouriteButton :id="`car-${car.id}`" class="local-card__fav" />
     </div>
@@ -32,29 +32,29 @@
         {{ formatUsd(car.price) }}
         <s v-if="car.oldPrice" class="local-card__old-price">{{ formatUsd(car.oldPrice) }}</s>
       </p>
-      <p v-if="diff > 0" class="local-card__diff">+{{ formatUsd(diff) }} bazar qiymətindən ucuz</p>
+      <p v-if="diff > 0" class="local-card__diff">+{{ formatUsd(diff) }} {{ $t('bazar qiymətindən ucuz') }}</p>
       <p class="local-card__city"><i class="bi bi-geo-alt" /> {{ car.location }}</p>
 
       <ul class="local-card__specs">
         <li>
           <i class="bi bi-fuel-pump" />
-          <span>Yanacaq</span>
+          <span>{{ $t('Yanacaq') }}</span>
           <strong>{{ car.fuel }}</strong>
         </li>
         <li>
           <i class="bi bi-speedometer2" />
-          <span>Yürüş</span>
+          <span>{{ $t('Yürüş') }}</span>
           <strong>{{ car.mileage }}</strong>
         </li>
         <li>
           <i class="bi bi-gear-wide-connected" />
-          <span>Mühərrik</span>
+          <span>{{ $t('Mühərrik') }}</span>
           <strong>{{ car.engine }}</strong>
         </li>
       </ul>
 
       <NuxtLink :to="link" class="link-arrow local-card__more">
-        Ətraflı bax
+        {{ $t('Ətraflı bax') }}
         <i class="bi bi-arrow-right" />
       </NuxtLink>
     </div>

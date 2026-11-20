@@ -6,7 +6,7 @@
       <input v-model="localTo" :type="type" class="form-input" :placeholder="toLabel" :disabled="disabled">
     </div>
 
-    <p v-if="hint" class="range-filter__hint">{{ hint }}</p>
+    <p v-if="hint" class="range-filter__hint">{{ $t(hint) }}</p>
 
     <button
       type="button"
@@ -14,7 +14,7 @@
       :disabled="disabled"
       @click="$emit('apply', String(localFrom || ''), String(localTo || ''))"
     >
-      Filtirlə
+      {{ $t('Filtirlə') }}
     </button>
   </div>
 </template>

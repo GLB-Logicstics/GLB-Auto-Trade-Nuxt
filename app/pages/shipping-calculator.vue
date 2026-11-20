@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <PageHeader
-      title="Daşınma kalkulyatoru"
-      subtitle="ABŞ-dakı hərrac meydançasından Poti limanına və Bakıya qədər daşınma qiyməti."
-      :crumbs="[{ label: 'Daşınma kalkulyatoru' }]"
+      :title="$t('Daşınma kalkulyatoru')"
+      :subtitle="$t('ABŞ-dakı hərrac meydançasından Poti limanına və Bakıya qədər daşınma qiyməti.')"
+      :crumbs="[{ label: $t('Daşınma kalkulyatoru') }]"
     />
 
     <CalculatorTabs />
@@ -12,39 +12,39 @@
       <div class="card">
         <h2 class="panel__title">
           <i class="bi bi-truck" />
-          Marşrut
+          {{ $t('Marşrut') }}
         </h2>
 
         <div class="panel__body">
           <div class="form-field">
-            <span>Auksion</span>
+            <span>{{ $t('Auksion') }}</span>
             <BaseSelect v-model="auction" :options="auctions" :clearable="false" />
           </div>
 
           <div class="form-field">
-            <span>Hərrac meydançası</span>
-            <BaseSelect v-model="location" :options="locationOptions" placeholder="Şəhər seçin" searchable />
+            <span>{{ $t('Hərrac meydançası') }}</span>
+            <BaseSelect v-model="location" :options="locationOptions" :placeholder="$t('Şəhər seçin')" searchable />
           </div>
 
           <div class="form-field">
-            <span>Çatdırılma ölkəsi</span>
+            <span>{{ $t('Çatdırılma ölkəsi') }}</span>
             <BaseSelect v-model="country" :options="countries" :clearable="false" />
           </div>
 
           <dl class="info-list">
             <div>
-              <dt>ABŞ – Poti</dt>
+              <dt>{{ $t('ABŞ – Poti') }}</dt>
               <dd>{{ usShipping ? formatMoney(usShipping) : '—' }}</dd>
             </div>
             <div v-if="country === 'az'">
-              <dt>Poti – Bakı</dt>
+              <dt>{{ $t('Poti – Bakı') }}</dt>
               <dd>{{ formatMoney(potiPrice) }}</dd>
             </div>
           </dl>
 
           <p class="shipping-calc__total">
-            <span>Cəmi daşınma</span>
-            <strong>{{ usShipping ? formatMoney(total) : 'Meydança seçin' }}</strong>
+            <span>{{ $t('Cəmi daşınma') }}</span>
+            <strong>{{ usShipping ? formatMoney(total) : $t('Meydança seçin') }}</strong>
           </p>
         </div>
       </div>
@@ -52,7 +52,7 @@
       <div class="card">
         <h2 class="panel__title">
           <i class="bi bi-list-ul" />
-          {{ auction }} meydançaları (ABŞ – Poti)
+          {{ $t('{auction} meydançaları (ABŞ – Poti)', { auction }) }}
         </h2>
 
         <ul class="shipping-calc__list">
@@ -62,7 +62,7 @@
             :class="{ 'is-active': item.value === location }"
             @click="location = item.value"
           >
-            <span>{{ item.label }}</span>
+            <span>{{ $t(item.label) }}</span>
             <strong>{{ formatUsd(prices[item.value] || 0) }}</strong>
           </li>
         </ul>
@@ -83,9 +83,10 @@ export default defineComponent({
   name: 'ShippingCalculatorPage',
 
   setup() {
+    const t = useNuxtApp().$t
     useSeoMeta({
-      title: 'Daşınma kalkulyatoru — GLB Logistics',
-      description: 'ABŞ hərrac meydançalarından Poti və Bakıya avtomobil daşınma qiymətləri.',
+      title: () => t('Daşınma kalkulyatoru — GLB Logistics'),
+      description: () => t('ABŞ hərrac meydançalarından Poti və Bakıya avtomobil daşınma qiymətləri.'),
     })
   },
 

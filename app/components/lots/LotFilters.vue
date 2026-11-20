@@ -3,16 +3,16 @@
     <div class="lot-filters__head">
       <span class="lot-filters__title">
         <i class="bi bi-sliders" />
-        Filtrlər
+        {{ $t('Filtrlər') }}
       </span>
       <button v-if="activeCount" type="button" class="lot-filters__reset" @click="resetFilters">
-        Təmizlə ({{ activeCount }})
+        {{ $t('Təmizlə') }} ({{ activeCount }})
       </button>
     </div>
 
-    <p class="lot-filters__section">Hərrac filtrləri</p>
+    <p class="lot-filters__section">{{ $t('Hərrac filtrləri') }}</p>
 
-    <FilterGroup title="Auksion" :count="filters.auctions.length" opened>
+    <FilterGroup :title="$t('Auksion')" :count="filters.auctions.length" opened>
       <CheckboxList
         :options="auctions"
         :selected="filters.auctions"
@@ -21,7 +21,7 @@
       />
     </FilterGroup>
 
-    <FilterGroup title="Auksion növü" :count="filters.auctionTypes.length">
+    <FilterGroup :title="$t('Auksion növü')" :count="filters.auctionTypes.length">
       <CheckboxList
         :options="auctionTypes"
         :selected="filters.auctionTypes"
@@ -30,22 +30,22 @@
       />
     </FilterGroup>
 
-    <FilterGroup title="Yeni əlavə olunan" :count="filters.added.length">
+    <FilterGroup :title="$t('Yeni əlavə olunan')" :count="filters.added.length">
       <CheckboxList :options="addedOptions" :selected="filters.added" @apply="setList('added', $event)" />
     </FilterGroup>
 
-    <FilterGroup title="Satış tarixi" :count="filters.saleFrom || filters.saleTo ? 1 : 0">
+    <FilterGroup :title="$t('Satış tarixi')" :count="filters.saleFrom || filters.saleTo ? 1 : 0">
       <RangeFilter
         type="date"
-        from-label="Başlanğıc"
-        to-label="Son"
+        :from-label="$t('Başlanğıc')"
+        :to-label="$t('Son')"
         :from="filters.saleFrom"
         :to="filters.saleTo"
         @apply="(from, to) => setRange('saleFrom', 'saleTo', from, to)"
       />
     </FilterGroup>
 
-    <FilterGroup title="Yer" :count="filters.locations.length">
+    <FilterGroup :title="$t('Yer')" :count="filters.locations.length">
       <CheckboxList
         :options="optionsOf('locations')"
         :selected="filters.locations"
@@ -53,32 +53,32 @@
       />
     </FilterGroup>
 
-    <p class="lot-filters__section">Filtrlər</p>
+    <p class="lot-filters__section">{{ $t('Filtrlər') }}</p>
 
-    <FilterGroup title="Marka" :count="filters.makes.length" opened>
+    <FilterGroup :title="$t('Marka')" :count="filters.makes.length" opened>
       <CheckboxList :options="optionsOf('makes')" :selected="filters.makes" @apply="setList('makes', $event)" />
     </FilterGroup>
 
-    <FilterGroup title="Model" :count="filters.models.length">
+    <FilterGroup :title="$t('Model')" :count="filters.models.length">
       <CheckboxList
         :options="filters.makes.length ? optionsOf('models') : []"
         :selected="filters.models"
-        empty-text="Əvvəlcə marka seçin"
+        :empty-text="$t('Əvvəlcə marka seçin')"
         @apply="setList('models', $event)"
       />
     </FilterGroup>
 
-    <FilterGroup title="İl" :count="filters.yearFrom || filters.yearTo ? 1 : 0">
+    <FilterGroup :title="$t('İl')" :count="filters.yearFrom || filters.yearTo ? 1 : 0">
       <RangeFilter
         :from="filters.yearFrom"
         :to="filters.yearTo"
-        :hint="filters.makes.length ? yearRange : 'İl seçmək üçün əvvəlcə marka seçin'"
+        :hint="filters.makes.length ? yearRange : $t('İl seçmək üçün əvvəlcə marka seçin')"
         :disabled="!filters.makes.length"
         @apply="(from, to) => setRange('yearFrom', 'yearTo', from, to)"
       />
     </FilterGroup>
 
-    <FilterGroup title="Yürüş" :count="filters.mileageFrom || filters.mileageTo ? 1 : 0">
+    <FilterGroup :title="$t('Yürüş')" :count="filters.mileageFrom || filters.mileageTo ? 1 : 0">
       <RangeFilter
         :from="filters.mileageFrom"
         :to="filters.mileageTo"
@@ -87,7 +87,7 @@
       />
     </FilterGroup>
 
-    <FilterGroup title="Qiymət (USD)" :count="filters.priceFrom || filters.priceTo ? 1 : 0">
+    <FilterGroup :title="$t('Qiymət (USD)')" :count="filters.priceFrom || filters.priceTo ? 1 : 0">
       <RangeFilter
         :from="filters.priceFrom"
         :to="filters.priceTo"

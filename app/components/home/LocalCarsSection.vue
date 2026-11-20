@@ -2,9 +2,9 @@
   <section class="section">
     <div class="container">
       <SectionHeading
-        title="Hazırda"
-        highlight="satışda"
-        subtitle="Ölkə və şəhər seçin — həmin şəhərdə satışda olan avtomobillərə baxın"
+        :title="$t('Hazırda')"
+        :highlight="$t('satışda')"
+        :subtitle="$t('Ölkə və şəhər seçin — həmin şəhərdə satışda olan avtomobillərə baxın')"
       />
 
       <div class="local-section__filters">
@@ -16,13 +16,13 @@
             :class="{ 'is-active': localCountry === item.value }"
             @click="setLocalCountry(item.value)"
           >
-            {{ item.label }}
+            {{ $t(item.label) }}
           </button>
         </div>
         <BaseSelect
           v-model="localCity"
           :options="localCityOptions"
-          placeholder="Bütün şəhərlər"
+          :placeholder="$t('Bütün şəhərlər')"
           class="local-section__city"
         />
       </div>
@@ -44,13 +44,13 @@
 
         <div v-else class="card empty-state">
           <i class="bi bi-car-front" />
-          <p>Bu şəhərdə hazırda satışda avtomobil yoxdur.</p>
+          <p>{{ $t('Bu şəhərdə hazırda satışda avtomobil yoxdur.') }}</p>
         </div>
       </div>
 
       <div class="local-section__more">
         <NuxtLink :to="localMoreLink" class="btn btn--accent local-section__button">
-          Hamısına bax
+          {{ $t('Hamısına bax') }}
           <i class="bi bi-arrow-right" />
         </NuxtLink>
       </div>

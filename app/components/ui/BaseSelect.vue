@@ -1,8 +1,8 @@
 <template>
   <div v-click-outside="close" class="select" :class="{ 'is-open': open, 'is-disabled': disabled }">
     <button type="button" class="select__toggle" :disabled="disabled" @click="toggle">
-      <span v-if="selected" class="select__value">{{ selected.label }}</span>
-      <span v-else class="select__placeholder">{{ placeholder }}</span>
+      <span v-if="selected" class="select__value">{{ $t(selected.label) }}</span>
+      <span v-else class="select__placeholder">{{ $t(placeholder) }}</span>
       <i class="bi bi-chevron-down select__chevron" />
     </button>
 
@@ -10,7 +10,7 @@
       v-if="clearable && selected && !disabled"
       type="button"
       class="select__clear"
-      aria-label="Təmizlə"
+      :aria-label="$t('Təmizlə')"
       @click="choose('')"
     >
       <i class="bi bi-x" />
@@ -19,7 +19,7 @@
     <div v-if="open" class="select__dropdown">
       <div v-if="searchable" class="select__search">
         <i class="bi bi-search" />
-        <input ref="search" v-model="search" type="text" placeholder="Axtar">
+        <input ref="search" v-model="search" type="text" :placeholder="$t('Axtar')">
       </div>
 
       <ul class="select__list">
@@ -30,11 +30,11 @@
             :class="{ 'is-active': option.value === modelValue }"
             @click="choose(option.value)"
           >
-            {{ option.label }}
+            {{ $t(option.label) }}
             <i v-if="option.value === modelValue" class="bi bi-check2" />
           </button>
         </li>
-        <li v-if="!filteredOptions.length" class="select__empty">Nəticə tapılmadı</li>
+        <li v-if="!filteredOptions.length" class="select__empty">{{ $t('Nəticə tapılmadı') }}</li>
       </ul>
     </div>
   </div>

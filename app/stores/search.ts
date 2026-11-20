@@ -1,8 +1,10 @@
 import { defineStore } from 'pinia'
-import { auctions, makes, places, years } from '~/data/filters'
+import { auctions, places, years } from '~/data/filters'
 import { useCarsStore } from '~/stores/cars'
 import { useLotsStore } from '~/stores/lots'
-import type { Option, Suggestion } from '~/types'
+import { useI18nStore } from '~/stores/i18n'
+import { collectMakes } from '~/utils/makes'
+import type { Make, Option, Suggestion } from '~/types'
 
 export const useSearchStore = defineStore('search', {
   state: () => ({
@@ -22,12 +24,16 @@ export const useSearchStore = defineStore('search', {
   }),
 
   getters: {
+    makes(): Make[] {
+      return collectMakes(useLotsStore().items, useCarsStore().items)
+    },
+
     makeOptions(): Option[] {
-      return makes.map((make) => ({ label: make.name, value: make.name }))
+      return this.makes.map((make) => ({ label: make.name, value: make.name }))
     },
 
     modelOptions(state): Option[] {
-      const make = makes.find((item) => item.name === state.make)
+      const make = this.makes.find((item) => item.name === state.make)
       if (!make) return []
       return make.models.map((model) => ({ label: model, value: model }))
     },
@@ -61,7 +67,7 @@ export const useSearchStore = defineStore('search', {
       const result: Suggestion[] = []
 
       if (state.inAuction) {
-        for (const make of makes) {
+        for (const make of this.makes) {
           if (make.name.toLowerCase().includes(text)) {
             result.push({ title: make.name, subtitle: 'Marka', to: `/auction-lots?makes=${make.name}` })
           }
@@ -86,7 +92,7 @@ export const useSearchStore = defineStore('search', {
       if (state.inOther) {
         for (const car of useCarsStore().items) {
           if (car.title.toLowerCase().includes(text)) {
-            result.push({ title: car.title, subtitle: `${car.city} — satışda`, to: `/cars/${car.slug}` })
+            result.push({ title: car.title, subtitle: `${car.city} — ${useI18nStore().t('satışda')}`, to: `/cars/${car.slug}` })
           }
         }
       }

@@ -9,7 +9,7 @@
             v-model="text"
             type="text"
             class="search-modal__input"
-            placeholder="Marka, model, lot və ya VIN üzrə axtar"
+            :placeholder="$t('Marka, model, lot və ya VIN üzrə axtar')"
             autocomplete="off"
           >
 
@@ -17,7 +17,7 @@
             <li v-for="item in suggestions" :key="item.to + item.title">
               <NuxtLink :to="item.to" class="search-modal__result" @click="closeSearch">
                 <span class="search-modal__result-title">{{ item.title }}</span>
-                <span class="search-modal__result-subtitle">{{ item.subtitle }}</span>
+                <span class="search-modal__result-subtitle">{{ $t(item.subtitle) }}</span>
               </NuxtLink>
             </li>
           </ul>
@@ -27,18 +27,18 @@
           <div class="search-modal__checks">
             <label class="checkbox">
               <input v-model="inAuction" type="checkbox">
-              Auksion
+              {{ $t('Auksion') }}
             </label>
             <label class="checkbox">
               <input v-model="inOther" type="checkbox">
-              Digər
+              {{ $t('Digər') }}
             </label>
           </div>
 
           <button type="submit" class="btn btn--accent search-modal__submit" :disabled="!text.trim()">
-            Axtar
+            {{ $t('Axtar') }}
           </button>
-          <button type="button" class="search-modal__close" aria-label="Bağla" @click="closeSearch">
+          <button type="button" class="search-modal__close" :aria-label="$t('Bağla')" @click="closeSearch">
             <i class="bi bi-x-lg" />
           </button>
         </div>

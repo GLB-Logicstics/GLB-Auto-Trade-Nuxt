@@ -2,7 +2,7 @@
   <div class="container auth-card">
     <div class="card auth-card__box">
       <span class="auth-card__icon"><i :class="['bi', icon]" /></span>
-      <h1 class="auth-card__title">{{ title }}</h1>
+      <h1 class="auth-card__title">{{ $t(title) }}</h1>
       <p class="auth-card__text">{{ text }}</p>
       <slot />
     </div>

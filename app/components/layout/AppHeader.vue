@@ -17,7 +17,7 @@
         <div class="header__group">
           <NuxtLink to="/favourite" class="header__top-link">
             <i class="bi bi-heart" />
-            Seçilmişlər
+            {{ $t('Seçilmişlər') }}
           </NuxtLink>
           <span class="header__divider" />
           <NuxtLink v-if="loggedIn" to="/profile" class="header__top-link">
@@ -26,7 +26,7 @@
           </NuxtLink>
           <NuxtLink v-else to="/login" class="header__top-link">
             <i class="bi bi-person-badge" />
-            Daxil ol
+            {{ $t('Daxil ol') }}
           </NuxtLink>
           <div class="header__socials">
             <a
@@ -52,16 +52,16 @@
         <nav class="header__nav">
           <ul class="nav">
             <li v-for="item in mainNav" :key="item.label" class="nav__item">
-              <NuxtLink v-if="item.to" :to="item.to" class="nav__link">{{ item.label }}</NuxtLink>
+              <NuxtLink v-if="item.to" :to="item.to" class="nav__link">{{ $t(item.label) }}</NuxtLink>
 
               <template v-else>
                 <button type="button" class="nav__link">
-                  {{ item.label }}
+                  {{ $t(item.label) }}
                   <i class="bi bi-caret-down-fill nav__caret" />
                 </button>
                 <ul class="nav__submenu">
                   <li v-for="child in item.children" :key="child.to">
-                    <NuxtLink :to="child.to" class="nav__sublink">{{ child.label }}</NuxtLink>
+                    <NuxtLink :to="child.to" class="nav__sublink">{{ $t(child.label) }}</NuxtLink>
                   </li>
                 </ul>
               </template>
@@ -70,7 +70,7 @@
         </nav>
 
         <div class="header__tools">
-          <button type="button" class="header__icon" aria-label="Axtarış" @click="openSearch">
+          <button type="button" class="header__icon" :aria-label="$t('Axtarış')" @click="openSearch">
             <i class="bi bi-search" />
           </button>
           <NotificationDropdown class="header__icon--desktop" />
@@ -80,7 +80,7 @@
             type="button"
             class="header__burger"
             :class="{ 'is-open': mobileMenuOpen }"
-            aria-label="Menyu"
+            :aria-label="$t('Menyu')"
             @click="toggleMobileMenu"
           >
             <span />

@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
-import { cities, countries } from '~/data/filters'
+import { useI18nStore } from '~/stores/i18n'
+import { countries } from '~/data/filters'
+import { useSiteStore } from '~/stores/site'
 import type { CarFilters, LocalCar, Option } from '~/types'
 
 export const CAR_LIST_KEYS = [
@@ -81,7 +83,7 @@ export const useCarsStore = defineStore('cars', {
     countryOptions: () => countries,
 
     cityOptions(state): Option[] {
-      return cities[state.filters.country] || []
+      return useSiteStore().cityOptions(state.filters.country)
     },
 
     countryLabel(state): string {
@@ -138,10 +140,10 @@ export const useCarsStore = defineStore('cars', {
     },
 
     rangeText(): string {
-      if (!this.total) return '0 nəticə'
+      if (!this.total) return useI18nStore().t('0 nəticə')
       const start = (this.page - 1) * this.perPage + 1
       const end = Math.min(this.page * this.perPage, this.total)
-      return `${start}-${end} / ${this.total} nəticə göstərilir`
+      return useI18nStore().t('{start}-{end} / {total} nəticə göstərilir', { start, end, total: this.total })
     },
 
     optionsOf: (state) => (key: CarListKey): Option[] => {

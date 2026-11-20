@@ -1,44 +1,44 @@
 <template>
   <div class="cost-result">
-    <p class="cost-result__heading">Nəticə</p>
+    <p class="cost-result__heading">{{ $t('Nəticə') }}</p>
 
     <p class="cost-result__row">
-      <span>Təklif məbləği</span> <strong>{{ formatMoney(result.bid) }}</strong>
+      <span>{{ $t('Təklif məbləği') }}</span> <strong>{{ formatMoney(result.bid) }}</strong>
     </p>
     <p class="cost-result__row">
-      <span>Hərrac rüsumu</span> <strong>{{ formatMoney(result.auctionFee) }}</strong>
+      <span>{{ $t('Hərrac rüsumu') }}</span> <strong>{{ formatMoney(result.auctionFee) }}</strong>
     </p>
     <p class="cost-result__row">
-      <span>Daşınma (ABŞ – Poti)</span>
-      <strong v-if="result.shippingUnknown && result.bid">Əlaqə saxlayın</strong>
+      <span>{{ $t('Daşınma (ABŞ – Poti)') }}</span>
+      <strong v-if="result.shippingUnknown && result.bid">{{ $t('Əlaqə saxlayın') }}</strong>
       <strong v-else>{{ formatMoney(result.usShipping) }}</strong>
     </p>
     <p v-if="country === 'az'" class="cost-result__row">
-      <span>Daşınma (Poti – Bakı)</span>
+      <span>{{ $t('Daşınma (Poti – Bakı)') }}</span>
       <strong>{{ formatMoney(result.potiShipping) }}</strong>
     </p>
     <p class="cost-result__row">
-      <span>Gömrük ({{ country === 'az' ? 'Azərbaycan' : 'Gürcüstan' }})</span>
+      <span>{{ $t('Gömrük') }} ({{ $t(country === 'az' ? 'Azərbaycan' : 'Gürcüstan') }})</span>
       <strong>
         {{ formatMoney(result.customs) }}
         <small v-if="result.customsLocal">{{ localText }}</small>
       </strong>
     </p>
     <p v-if="result.extras" class="cost-result__row">
-      <span>Əlavə xərclər</span>
+      <span>{{ $t('Əlavə xərclər') }}</span>
       <strong>{{ formatMoney(result.extras) }}</strong>
     </p>
     <p class="cost-result__row cost-result__total">
-      <span>Yekun qiymət</span> <strong>{{ formatMoney(result.total) }}</strong>
+      <span>{{ $t('Yekun qiymət') }}</span> <strong>{{ formatMoney(result.total) }}</strong>
     </p>
 
-    <p class="cost-result__note">Hesablama təxminidir. Dəqiq məbləğ üçün bizimlə əlaqə saxlayın.</p>
+    <p class="cost-result__note">{{ $t('Hesablama təxminidir. Dəqiq məbləğ üçün bizimlə əlaqə saxlayın.') }}</p>
 
     <div class="cost-result__contact">
-      <NuxtLink to="/contact" class="btn btn--accent btn--sm">Sorğu göndər</NuxtLink>
+      <NuxtLink to="/contact" class="btn btn--accent btn--sm">{{ $t('Sorğu göndər') }}</NuxtLink>
       <a :href="contact.whatsapp" class="btn btn--outline btn--sm" target="_blank" rel="noopener">
         <i class="bi bi-whatsapp cost-result__whatsapp" />
-        Bizə yazın
+        {{ $t('Bizə yazın') }}
       </a>
     </div>
   </div>

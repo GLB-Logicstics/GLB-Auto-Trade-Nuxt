@@ -19,6 +19,7 @@ export interface SocialLink {
 export interface Language {
   code: string
   label: string
+  name: string
 }
 
 export interface BottomNavItem {
@@ -254,9 +255,30 @@ export interface RequestItem {
 }
 
 export interface User {
+  id: number
   name: string
   email: string
   phone: string
+  role: 'user' | 'dealer'
+  company: string
+  dealerStatus: '' | 'pending' | 'approved' | 'rejected'
+}
+
+export interface UserRequest {
+  id: number
+  subject: string
+  message: string
+  status: string
+  created_at: string
+}
+
+export interface DealerCar {
+  id: number
+  slug: string
+  isActive: boolean
+  clicks: number
+  clicksMonth: number
+  data: Partial<LocalCar>
 }
 
 export interface CostLine {
@@ -365,11 +387,25 @@ export interface Bootstrap {
   news: Notification[]
   hero_slides: HeroSlide[]
   brands: Brand[]
+  part_types: PartType[]
   shipping: Record<string, Record<string, number>>
+  languages: { code: string; name: string; isDefault: boolean }[]
+  translations: Record<string, Record<string, string>>
+  marketPrices: MarketPrice[]
   settings: {
+    menus?: { main: NavItem[]; footer: NavLink[]; info: NavLink[] }
+    locations?: Record<string, string[]>
     site?: SiteSettings
     tariffs?: Tariffs
     price_history?: Record<string, PricePoint[]>
     tracking_sample?: { code: string; title: string; steps: TrackingStep[] }
   }
+}
+
+export interface MarketPrice {
+  country: string
+  make: string
+  model: string
+  year: number
+  price: number
 }

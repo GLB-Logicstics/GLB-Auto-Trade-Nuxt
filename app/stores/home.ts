@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
-import { cities, countries } from '~/data/filters'
+import { countries } from '~/data/filters'
+import { useSiteStore } from '~/stores/site'
 import { useCarsStore } from '~/stores/cars'
 import { useKoreaStore } from '~/stores/korea'
 import { isUpcoming, useLotsStore } from '~/stores/lots'
@@ -66,7 +67,7 @@ export const useHomeStore = defineStore('home', {
     },
 
     localCityOptions(state): Option[] {
-      return cities[state.localCountry] || []
+      return useSiteStore().cityOptions(state.localCountry)
     },
 
     localCars(state): LocalCar[] {

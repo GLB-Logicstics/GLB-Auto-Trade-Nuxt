@@ -66,17 +66,22 @@ export default defineComponent({
     @include flex-center;
     width: 64px;
     height: 64px;
+    padding: 12px;
+    background-color: $white;
+    border: 1px solid $line;
     border-radius: 50%;
     transition: transform $transition, border-color $transition;
 
     @include up(sm) {
       width: 76px;
       height: 76px;
+      padding: 14px;
     }
 
     @include up(md) {
       width: 92px;
       height: 92px;
+      padding: 16px;
     }
 
     img {

@@ -1,35 +1,35 @@
 <template>
   <div v-if="service" class="container">
     <PageHeader
-      :title="service.title"
-      :subtitle="service.short"
-      :crumbs="[{ label: 'Xidmətlər', to: '/services' }, { label: service.title }]"
+      :title="$tr(service, 'title')"
+      :subtitle="$tr(service, 'short')"
+      :crumbs="[{ label: $t('Xidmətlər'), to: '/services' }, { label: $tr(service, 'title') }]"
     />
 
     <div class="two-col">
       <div class="service-page__main">
         <div class="card service-page__media">
           <i :class="['bi', service.icon]" />
-          <span>Foto və video tezliklə əlavə olunacaq</span>
+          <span>{{ $t('Foto və video tezliklə əlavə olunacaq') }}</span>
         </div>
 
         <div class="card">
           <h2 class="panel__title">
             <i class="bi bi-info-circle" />
-            Xidmət haqqında
+            {{ $t('Xidmət haqqında') }}
           </h2>
           <div class="panel__body">
-            <p v-for="(text, index) in service.description" :key="index">{{ text }}</p>
+            <p v-for="(text, index) in $tr(service, 'description')" :key="index">{{ text }}</p>
           </div>
         </div>
 
         <div class="card">
           <h2 class="panel__title">
             <i class="bi bi-list-ol" />
-            Necə işləyir
+            {{ $t('Necə işləyir') }}
           </h2>
           <ol class="service-page__steps">
-            <li v-for="(step, index) in service.steps" :key="step">
+            <li v-for="(step, index) in $tr(service, 'steps')" :key="step">
               <span>{{ index + 1 }}</span>
               {{ step }}
             </li>
@@ -37,7 +37,7 @@
         </div>
       </div>
 
-      <RequestForm :subject="service.title" title="Bu xidmət üçün müraciət" />
+      <RequestForm :subject="service.title" :title="$t('Bu xidmət üçün müraciət')" />
     </div>
   </div>
 </template>

@@ -2,12 +2,12 @@
   <div class="card price-history">
     <h2 class="price-history__title">
       <i class="bi bi-bar-chart-line" />
-      GLB Helper — orta satış qiyməti
+      {{ $t('GLB Helper — orta satış qiyməti') }}
     </h2>
 
     <div class="price-history__body">
       <p class="price-history__text">
-        Son 6 ayda {{ name }} üçün hərraclarda orta satış qiyməti. Orta:
+        {{ $t('Son 6 ayda {name} üçün hərraclarda orta satış qiyməti. Orta:', { name }) }}
         <strong>{{ formatUsd(average) }}</strong>
       </p>
 
@@ -15,11 +15,11 @@
         <li v-for="point in points" :key="point.label" class="price-history__item">
           <span class="price-history__value">{{ short(point.price) }}</span>
           <span class="price-history__bar" :style="{ height: `${(point.price / max) * 100}%` }" />
-          <span class="price-history__label">{{ point.label }}</span>
+          <span class="price-history__label">{{ $t(point.label) }}</span>
         </li>
       </ul>
 
-      <p class="price-history__note">Nümunə məlumatdır. Real qrafik GLB Helper inteqrasiyasından sonra göstəriləcək.</p>
+      <p class="price-history__note">{{ $t('Nümunə məlumatdır. Real qrafik GLB Helper inteqrasiyasından sonra göstəriləcək.') }}</p>
     </div>
   </div>
 </template>

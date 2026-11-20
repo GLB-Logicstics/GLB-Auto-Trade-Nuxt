@@ -12,16 +12,16 @@
 
       <span class="gallery__status" :style="{ backgroundColor: status.color }">
         <i :class="['bi', status.icon]" />
-        {{ status.label }}
+        {{ $t(status.label) }}
       </span>
 
       <span class="gallery__counter">{{ active + 1 }} / {{ images.length }}</span>
 
       <template v-if="images.length > 1">
-        <button type="button" class="gallery__arrow gallery__arrow--prev" aria-label="Əvvəlki" @click="prev">
+        <button type="button" class="gallery__arrow gallery__arrow--prev" :aria-label="$t('Əvvəlki')" @click="prev">
           <i class="bi bi-chevron-left" />
         </button>
-        <button type="button" class="gallery__arrow gallery__arrow--next" aria-label="Növbəti" @click="next">
+        <button type="button" class="gallery__arrow gallery__arrow--next" :aria-label="$t('Növbəti')" @click="next">
           <i class="bi bi-chevron-right" />
         </button>
       </template>

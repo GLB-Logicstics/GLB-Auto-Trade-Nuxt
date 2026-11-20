@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <PageHeader
-      title="Koreyadan gətirilən avtomobillər"
-      subtitle="Koreyadakı qiymət, çatdırılma və seçdiyiniz ölkəyə düşən yekun qiymət bir kartda."
-      :crumbs="[{ label: 'Koreyadan avtomobillər' }]"
+      :title="$t('Koreyadan gətirilən avtomobillər')"
+      :subtitle="$t('Koreyadakı qiymət, çatdırılma və seçdiyiniz ölkəyə düşən yekun qiymət bir kartda.')"
+      :crumbs="[{ label: $t('Koreyadan avtomobillər') }]"
     />
 
     <div class="card korea-page__toolbar">
@@ -15,12 +15,12 @@
           :class="{ 'is-active': country === item.value }"
           @click="country = item.value"
         >
-          {{ item.label }}
+          {{ $t(item.label) }}
         </button>
       </div>
 
-      <BaseSelect :model-value="make" :options="makeOptions" placeholder="Marka" @update:model-value="setMake" />
-      <BaseSelect v-model="model" :options="modelOptions" :disabled="!make" placeholder="Model" />
+      <BaseSelect :model-value="make" :options="makeOptions" :placeholder="$t('Marka')" @update:model-value="setMake" />
+      <BaseSelect v-model="model" :options="modelOptions" :disabled="!make" :placeholder="$t('Model')" />
     </div>
 
     <div v-if="filteredCars.length" class="card-grid">
@@ -29,8 +29,8 @@
 
     <div v-else class="card empty-state">
       <i class="bi bi-search" />
-      <h2>Nəticə tapılmadı</h2>
-      <p>Seçdiyiniz marka və modelə uyğun avtomobil yoxdur.</p>
+      <h2>{{ $t('Nəticə tapılmadı') }}</h2>
+      <p>{{ $t('Seçdiyiniz marka və modelə uyğun avtomobil yoxdur.') }}</p>
     </div>
   </div>
 </template>
@@ -45,10 +45,11 @@ export default defineComponent({
   name: 'KoreaCarsPage',
 
   setup() {
+    const t = useNuxtApp().$t
     useSeoMeta({
-      title: 'Koreyadan avtomobillər — GLB Logistics',
-      description:
-        'Koreyadan Azərbaycana və Gürcüstana avtomobil gətirilməsi: qiymət, çatdırılma və gömrük daxil yekun məbləğ.',
+      title: () => t('Koreyadan avtomobillər — GLB Logistics'),
+      description: () =>
+        t('Koreyadan Azərbaycana və Gürcüstana avtomobil gətirilməsi: qiymət, çatdırılma və gömrük daxil yekun məbləğ.'),
     })
   },
 

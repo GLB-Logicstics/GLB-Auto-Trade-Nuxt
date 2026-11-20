@@ -1,28 +1,28 @@
 <template>
   <div class="container">
     <PageHeader
-      title="Avtomobil kataloqu"
-      subtitle="Marka, model və ili seçin — avtomobilin Azərbaycana və Gürcüstana gətirilmə xərcini yerli bazar qiyməti ilə müqayisə edin."
-      :crumbs="[{ label: 'Avtomobil kataloqu' }]"
+      :title="$t('Avtomobil kataloqu')"
+      :subtitle="$t('Marka, model və ili seçin — avtomobilin Azərbaycana və Gürcüstana gətirilmə xərcini yerli bazar qiyməti ilə müqayisə edin.')"
+      :crumbs="[{ label: $t('Avtomobil kataloqu') }]"
     />
 
     <div class="card catalog-page__form">
-      <BaseSelect :model-value="make" :options="makeOptions" placeholder="Marka seçin" @update:model-value="setMake" />
+      <BaseSelect :model-value="make" :options="makeOptions" :placeholder="$t('Marka seçin')" @update:model-value="setMake" />
       <BaseSelect
         :model-value="model"
         :options="modelOptions"
         :disabled="!make"
-        placeholder="Model seçin"
+        :placeholder="$t('Model seçin')"
         @update:model-value="setModel"
       />
-      <BaseSelect v-model="year" :options="yearOptions" :disabled="!model" placeholder="İl seçin" />
+      <BaseSelect v-model="year" :options="yearOptions" :disabled="!model" :placeholder="$t('İl seçin')" />
     </div>
 
     <div v-if="selected" class="catalog-page__result">
       <div v-for="country in countries" :key="country.value" class="card">
         <h2 class="panel__title">
           <i class="bi bi-geo-alt" />
-          {{ country.label }}
+          {{ $t(country.label) }}
         </h2>
 
         <div class="panel__body">
@@ -30,11 +30,11 @@
 
           <dl class="info-list">
             <div>
-              <dt>Yerli bazar qiyməti</dt>
+              <dt>{{ $t('Yerli bazar qiyməti') }}</dt>
               <dd>{{ formatUsd(selected.marketPrices[country.value] || 0) }}</dd>
             </div>
             <div>
-              <dt>Qənaət</dt>
+              <dt>{{ $t('Qənaət') }}</dt>
               <dd class="catalog-page__saving">{{ savingText(country.value) }}</dd>
             </div>
           </dl>
@@ -44,13 +44,12 @@
 
     <div v-else class="card empty-state">
       <i class="bi bi-journal-text" />
-      <h2>Avtomobil seçin</h2>
-      <p>Nəticəni görmək üçün marka, model və il seçin.</p>
+      <h2>{{ $t('Avtomobil seçin') }}</h2>
+      <p>{{ $t('Nəticəni görmək üçün marka, model və il seçin.') }}</p>
     </div>
 
     <p class="catalog-page__note">
-      Hərrac qiyməti son satışların orta göstəricisidir. Yerli bazar qiymətləri nümunədir və icazəli inteqrasiyadan
-      sonra avtomatik yenilənəcək.
+      {{ $t('Hərrac qiyməti son satışların orta göstəricisidir. Yerli bazar qiymətləri nümunədir və icazəli inteqrasiyadan sonra avtomatik yenilənəcək.') }}
     </p>
   </div>
 </template>
@@ -67,9 +66,10 @@ export default defineComponent({
   name: 'CatalogPage',
 
   setup() {
+    const t = useNuxtApp().$t
     useSeoMeta({
       title: 'Avtomobil kataloqu — GLB Logistics',
-      description: 'Avtomobilin Azərbaycana və Gürcüstana gətirilmə xərci və yerli bazar qiyməti ilə müqayisəsi.',
+      description: () => t('Avtomobilin Azərbaycana və Gürcüstana gətirilmə xərci və yerli bazar qiyməti ilə müqayisəsi.'),
     })
   },
 

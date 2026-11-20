@@ -1,19 +1,19 @@
 <template>
   <div class="checkbox-list">
-    <p v-if="!options.length" class="checkbox-list__empty">{{ emptyText }}</p>
+    <p v-if="!options.length" class="checkbox-list__empty">{{ $t(emptyText) }}</p>
 
     <template v-else>
-      <input v-if="searchable" v-model="search" type="text" class="form-input checkbox-list__search" placeholder="Axtar">
+      <input v-if="searchable" v-model="search" type="text" class="form-input checkbox-list__search" :placeholder="$t('Axtar')">
 
       <div class="checkbox-list__items">
         <label v-for="option in filteredOptions" :key="option.value" class="checkbox">
           <input v-model="picked" type="checkbox" :value="option.value">
-          {{ option.label }}
+          {{ $t(option.label) }}
         </label>
-        <p v-if="!filteredOptions.length" class="checkbox-list__empty">Nəticə tapılmadı</p>
+        <p v-if="!filteredOptions.length" class="checkbox-list__empty">{{ $t('Nəticə tapılmadı') }}</p>
       </div>
 
-      <button type="button" class="checkbox-list__apply" @click="$emit('apply', picked)">Filtirlə</button>
+      <button type="button" class="checkbox-list__apply" @click="$emit('apply', picked)">{{ $t('Filtirlə') }}</button>
     </template>
   </div>
 </template>

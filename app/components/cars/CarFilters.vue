@@ -3,7 +3,7 @@
     <div class="car-filters__head">
       <span class="car-filters__title">
         <i class="bi bi-sliders" />
-        Filtrlər
+        {{ $t('Filtrlər') }}
       </span>
     </div>
 
@@ -11,14 +11,14 @@
       <BaseSelect
         :model-value="filters.country"
         :options="countryOptions"
-        placeholder="Bütün ölkələr"
+        :placeholder="$t('Bütün ölkələr')"
         @update:model-value="setCountry"
       />
       <BaseSelect
         :model-value="filters.city"
         :options="cityOptions"
         :disabled="!filters.country"
-        placeholder="Şəhər"
+        :placeholder="$t('Şəhər')"
         @update:model-value="setCity"
       />
     </div>
@@ -28,33 +28,33 @@
         {{ countryLabel }}
         <i class="bi bi-x" />
       </button>
-      <button type="button" class="car-filters__clear" @click="resetFilters">Bütün filtrləri sil</button>
+      <button type="button" class="car-filters__clear" @click="resetFilters">{{ $t('Bütün filtrləri sil') }}</button>
     </div>
 
-    <FilterGroup title="Marka" :count="filters.makes.length" opened>
+    <FilterGroup :title="$t('Marka')" :count="filters.makes.length" opened>
       <CheckboxList :options="optionsOf('makes')" :selected="filters.makes" @apply="setList('makes', $event)" />
     </FilterGroup>
 
-    <FilterGroup title="Model" :count="filters.models.length">
+    <FilterGroup :title="$t('Model')" :count="filters.models.length">
       <CheckboxList
         :options="filters.makes.length ? optionsOf('models') : []"
         :selected="filters.models"
-        empty-text="Əvvəlcə marka seçin"
+        :empty-text="$t('Əvvəlcə marka seçin')"
         @apply="setList('models', $event)"
       />
     </FilterGroup>
 
-    <FilterGroup title="İl" :count="filters.yearFrom || filters.yearTo ? 1 : 0">
+    <FilterGroup :title="$t('İl')" :count="filters.yearFrom || filters.yearTo ? 1 : 0">
       <RangeFilter
         :from="filters.yearFrom"
         :to="filters.yearTo"
-        :hint="filters.makes.length ? rangeOf('year') : 'İl seçmək üçün əvvəlcə marka seçin'"
+        :hint="filters.makes.length ? rangeOf('year') : $t('İl seçmək üçün əvvəlcə marka seçin')"
         :disabled="!filters.makes.length"
         @apply="(from, to) => setRange('yearFrom', 'yearTo', from, to)"
       />
     </FilterGroup>
 
-    <FilterGroup title="Yürüş" :count="filters.mileageFrom || filters.mileageTo ? 1 : 0">
+    <FilterGroup :title="$t('Yürüş')" :count="filters.mileageFrom || filters.mileageTo ? 1 : 0">
       <RangeFilter
         :from="filters.mileageFrom"
         :to="filters.mileageTo"
@@ -63,7 +63,7 @@
       />
     </FilterGroup>
 
-    <FilterGroup title="Qiymət" :count="filters.priceFrom || filters.priceTo ? 1 : 0">
+    <FilterGroup :title="$t('Qiymət')" :count="filters.priceFrom || filters.priceTo ? 1 : 0">
       <RangeFilter
         :from="filters.priceFrom"
         :to="filters.priceTo"

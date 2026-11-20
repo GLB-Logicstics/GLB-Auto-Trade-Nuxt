@@ -4,9 +4,9 @@
       <UiSwiper :items="heroSlides" :options="options" variant="hero" navigation pagination>
         <template #default="{ item, index }">
           <div class="hero__slide">
-            <h1 v-if="index === 0" class="hero__title">{{ item.title }}</h1>
-            <h2 v-else class="hero__title">{{ item.title }}</h2>
-            <p class="hero__text">{{ item.description }}</p>
+            <h1 v-if="index === 0" class="hero__title">{{ $tr(item, 'title') }}</h1>
+            <h2 v-else class="hero__title">{{ $tr(item, 'title') }}</h2>
+            <p class="hero__text">{{ $tr(item, 'description') }}</p>
           </div>
         </template>
       </UiSwiper>

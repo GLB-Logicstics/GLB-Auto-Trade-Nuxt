@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <PageHeader
-      title="Hərrac kalkulyatoru"
-      subtitle="Hərracdan Azərbaycana və ya Gürcüstana qədər bütün xərcləri bir yerdə hesablayın."
-      :crumbs="[{ label: 'Hərrac kalkulyatoru' }]"
+      :title="$t('Hərrac kalkulyatoru')"
+      :subtitle="$t('Hərracdan Azərbaycana və ya Gürcüstana qədər bütün xərcləri bir yerdə hesablayın.')"
+      :crumbs="[{ label: $t('Hərrac kalkulyatoru') }]"
     />
 
     <CalculatorTabs />
@@ -12,61 +12,61 @@
       <form class="card" @submit.prevent>
         <h2 class="panel__title">
           <i class="bi bi-calculator" />
-          Avtomobil və hərrac məlumatları
+          {{ $t('Avtomobil və hərrac məlumatları') }}
         </h2>
 
         <div class="panel__body">
           <div class="form-grid">
             <div class="form-field">
-              <span>Auksion</span>
+              <span>{{ $t('Auksion') }}</span>
               <BaseSelect v-model="form.auction" :options="auctions" :clearable="false" />
             </div>
 
             <div class="form-field">
-              <span>Hərrac meydançası</span>
-              <BaseSelect v-model="form.location" :options="locationOptions" placeholder="Şəhər seçin" searchable />
+              <span>{{ $t('Hərrac meydançası') }}</span>
+              <BaseSelect v-model="form.location" :options="locationOptions" :placeholder="$t('Şəhər seçin')" searchable />
             </div>
 
             <label class="form-field">
-              <span>Təklif məbləği (USD)</span>
+              <span>{{ $t('Təklif məbləği (USD)') }}</span>
               <input v-model="form.bid" type="number" min="0" class="form-input" placeholder="0">
             </label>
 
             <div class="form-field">
-              <span>Sənəd növü</span>
+              <span>{{ $t('Sənəd növü') }}</span>
               <BaseSelect v-model="form.document" :options="documentOptions" :clearable="false" />
             </div>
 
             <label class="form-field">
-              <span>Mühərrik həcmi (sm³)</span>
+              <span>{{ $t('Mühərrik həcmi (sm³)') }}</span>
               <input v-model="form.engineCc" type="number" min="0" class="form-input" placeholder="2000">
             </label>
 
             <div class="form-field">
-              <span>Buraxılış ili</span>
+              <span>{{ $t('Buraxılış ili') }}</span>
               <BaseSelect v-model="form.year" :options="years" :clearable="false" />
             </div>
 
             <div class="form-field">
-              <span>Yanacaq növü</span>
+              <span>{{ $t('Yanacaq növü') }}</span>
               <BaseSelect v-model="form.fuel" :options="fuelOptions" :clearable="false" />
             </div>
 
             <div class="form-field">
-              <span>Çatdırılma ölkəsi</span>
+              <span>{{ $t('Çatdırılma ölkəsi') }}</span>
               <BaseSelect v-model="form.country" :options="countries" :clearable="false" />
             </div>
 
             <div class="form-field is-wide">
-              <span>Əlavə xərclər</span>
+              <span>{{ $t('Əlavə xərclər') }}</span>
               <label v-for="item in extraCosts" :key="item.id" class="checkbox">
                 <input v-model="form.extras" type="checkbox" :value="item.id">
-                {{ item.label }} (+${{ item.price }})
+                {{ $t(item.label) }} (+${{ item.price }})
               </label>
             </div>
           </div>
 
-          <button type="button" class="btn btn--outline" @click="reset">Sıfırla</button>
+          <button type="button" class="btn btn--outline" @click="reset">{{ $t('Sıfırla') }}</button>
         </div>
       </form>
 
@@ -103,10 +103,11 @@ export default defineComponent({
   name: 'AuctionCalculatorPage',
 
   setup() {
+    const t = useNuxtApp().$t
     useSeoMeta({
-      title: 'Hərrac kalkulyatoru — GLB Logistics',
-      description:
-        'Copart, IAAI və Manheim hərraclarından avtomobilin Azərbaycana və Gürcüstana gətirilmə xərcini hesablayın.',
+      title: () => t('Hərrac kalkulyatoru — GLB Logistics'),
+      description: () =>
+        t('Copart, IAAI və Manheim hərraclarından avtomobilin Azərbaycana və Gürcüstana gətirilmə xərcini hesablayın.'),
     })
   },
 

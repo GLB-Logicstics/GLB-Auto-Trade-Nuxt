@@ -1,31 +1,31 @@
 <template>
   <div class="container">
     <PageHeader
-      title="Əlaqə"
-      subtitle="Suallarınız üçün zəng edin, WhatsApp-a yazın və ya formu doldurun."
-      :crumbs="[{ label: 'Əlaqə' }]"
+      :title="$t('Əlaqə')"
+      :subtitle="$t('Suallarınız üçün zəng edin, WhatsApp-a yazın və ya formu doldurun.')"
+      :crumbs="[{ label: $t('Əlaqə') }]"
     />
 
     <div class="contact-page__cards">
       <a :href="phoneHref" class="card contact-page__card">
         <i class="bi bi-telephone" />
-        <span>Telefon</span>
+        <span>{{ $t('Telefon') }}</span>
         <strong>{{ contact.phoneDisplay }}</strong>
       </a>
       <a :href="contact.whatsapp" class="card contact-page__card" target="_blank" rel="noopener">
         <i class="bi bi-whatsapp" />
-        <span>WhatsApp</span>
-        <strong>Bizə yazın</strong>
+        <span>{{ $t('WhatsApp') }}</span>
+        <strong>{{ $t('Bizə yazın') }}</strong>
       </a>
       <a :href="emailHref" class="card contact-page__card">
         <i class="bi bi-envelope" />
-        <span>E-poçt</span>
+        <span>{{ $t('E-poçt') }}</span>
         <strong>{{ contact.email }}</strong>
       </a>
       <div class="card contact-page__card">
         <i class="bi bi-clock" />
-        <span>İş saatları</span>
-        <strong>{{ contact.workingHours }}</strong>
+        <span>{{ $t('İş saatları') }}</span>
+        <strong>{{ $tr(contact, 'workingHours') }}</strong>
       </div>
     </div>
 
@@ -35,9 +35,9 @@
       <div class="card contact-page__map">
         <h2 class="panel__title">
           <i class="bi bi-geo-alt" />
-          {{ contact.address }}
+          {{ $tr(contact, 'address') }}
         </h2>
-        <iframe :src="mapUrl" title="Xəritə" loading="lazy" referrerpolicy="no-referrer-when-downgrade" />
+        <iframe :src="mapUrl" :title="$t('Xəritə')" loading="lazy" referrerpolicy="no-referrer-when-downgrade" />
       </div>
     </div>
   </div>
@@ -52,9 +52,10 @@ export default defineComponent({
   name: 'ContactPage',
 
   setup() {
+    const t = useNuxtApp().$t
     useSeoMeta({
-      title: 'Əlaqə — GLB Logistics',
-      description: 'GLB Logistics ilə əlaqə: telefon, WhatsApp, e-poçt, ünvan və müraciət forması.',
+      title: () => t('Əlaqə — GLB Logistics'),
+      description: () => t('GLB Logistics ilə əlaqə: telefon, WhatsApp, e-poçt, ünvan və müraciət forması.'),
     })
   },
 

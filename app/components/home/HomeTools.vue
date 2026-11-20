@@ -4,19 +4,19 @@
       <div class="card home-tools__box">
         <h2 class="home-tools__title">
           <i class="bi bi-box-seam" />
-          Ehtiyat hissələri
+          {{ $t('Ehtiyat hissələri') }}
         </h2>
-        <p class="home-tools__text">Marka, model və hissə növünə görə axtarın, tapılmayanı ABŞ-dan gətirək.</p>
+        <p class="home-tools__text">{{ $t('Marka, model və hissə növünə görə axtarın, tapılmayanı ABŞ-dan gətirək.') }}</p>
 
         <div class="home-tools__types">
           <NuxtLink v-for="type in types" :key="type.value" :to="`/parts?type=${type.value}`" class="home-tools__type">
             <i :class="['bi', type.icon]" />
-            {{ type.label }}
+            {{ $t(type.label) }}
           </NuxtLink>
         </div>
 
         <NuxtLink to="/parts" class="link-arrow">
-          Bütün hissələr
+          {{ $t('Bütün hissələr') }}
           <i class="bi bi-arrow-right" />
         </NuxtLink>
       </div>
@@ -24,25 +24,25 @@
       <div class="card home-tools__box">
         <h2 class="home-tools__title">
           <i class="bi bi-journal-text" />
-          Avtomobil kataloqu
+          {{ $t('Avtomobil kataloqu') }}
         </h2>
         <p class="home-tools__text">
-          Avtomobili seçin — Azərbaycana və Gürcüstana gətirilmə xərcini yerli bazar qiyməti ilə müqayisə edin.
+          {{ $t('Avtomobili seçin — Azərbaycana və Gürcüstana gətirilmə xərcini yerli bazar qiyməti ilə müqayisə edin.') }}
         </p>
 
         <div class="home-tools__form">
-          <BaseSelect :model-value="make" :options="makeOptions" placeholder="Marka" @update:model-value="setMake" />
+          <BaseSelect :model-value="make" :options="makeOptions" :placeholder="$t('Marka')" @update:model-value="setMake" />
           <BaseSelect
             :model-value="model"
             :options="modelOptions"
             :disabled="!make"
-            placeholder="Model"
+            :placeholder="$t('Model')"
             @update:model-value="setModel"
           />
-          <BaseSelect v-model="year" :options="yearOptions" :disabled="!model" placeholder="İl" />
+          <BaseSelect v-model="year" :options="yearOptions" :disabled="!model" :placeholder="$t('İl')" />
           <NuxtLink :to="catalogLink" class="btn btn--accent">
             <i class="bi bi-calculator" />
-            Hesabla
+            {{ $t('Hesabla') }}
           </NuxtLink>
         </div>
       </div>

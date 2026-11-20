@@ -8,14 +8,14 @@
           <h1 class="lot-page__title">{{ lot.title }}</h1>
           <p class="lot-page__meta">
             <span>Lot #{{ lot.lotNumber }}</span>
-            <span>Yer: <b>{{ lot.location }}</b></span>
-            <span>Hərrac tarixi: {{ formatDate(lot.saleDate) }}</span>
+            <span>{{ $t('Yer:') }} <b>{{ lot.location }}</b></span>
+            <span>{{ $t('Hərrac tarixi:') }} {{ formatDate(lot.saleDate) }}</span>
           </p>
         </div>
 
         <button type="button" class="lot-page__favourite" :class="{ 'is-active': isFavourite }" @click="toggle(favouriteId)">
           <i :class="['bi', isFavourite ? 'bi-heart-fill' : 'bi-heart']" />
-          {{ isFavourite ? 'Seçilmişlərdədir' : 'Seçilmişlərə əlavə et' }}
+          {{ isFavourite ? $t('Seçilmişlərdədir') : $t('Seçilmişlərə əlavə et') }}
         </button>
       </div>
 
@@ -25,22 +25,22 @@
         <div class="card lot-page__box">
           <h2 class="lot-page__box-title">
             <i class="bi bi-card-list" />
-            Lot #{{ lot.lotNumber }} detalları
+            {{ $t('Lot #{number} detalları', { number: lot.lotNumber }) }}
           </h2>
           <dl class="lot-page__list">
-            <div><dt>VIN:</dt><dd>{{ lot.vin }}</dd></div>
-            <div><dt>Yürüş:</dt><dd>{{ formatMiles(lot.odometer, lot.odometerType) }}</dd></div>
-            <div><dt>Sənəd:</dt><dd>{{ lot.document }}</dd></div>
-            <div><dt>Əsas zədə:</dt><dd>{{ lot.primaryDamage }}</dd></div>
-            <div><dt>Əlavə zədə:</dt><dd>{{ lot.secondaryDamage }}</dd></div>
-            <div><dt>Ban növü:</dt><dd>{{ lot.bodyType }}</dd></div>
-            <div><dt>Rəng:</dt><dd>{{ lot.color }}</dd></div>
-            <div><dt>Mühərrik:</dt><dd>{{ lot.engine }}</dd></div>
-            <div><dt>Sürət qutusu:</dt><dd>{{ lot.transmission }}</dd></div>
-            <div><dt>Ötürücü:</dt><dd>{{ lot.drive }}</dd></div>
-            <div><dt>Yanacaq:</dt><dd>{{ lot.fuel }}</dd></div>
-            <div><dt>Açarlar:</dt><dd>{{ lot.hasKeys ? 'Var' : 'Yoxdur' }}</dd></div>
-            <div><dt>Vəziyyət:</dt><dd>{{ lot.condition }}</dd></div>
+            <div><dt>{{ $t('VIN:') }}</dt><dd>{{ lot.vin }}</dd></div>
+            <div><dt>{{ $t('Yürüş:') }}</dt><dd>{{ formatMiles(lot.odometer, lot.odometerType) }}</dd></div>
+            <div><dt>{{ $t('Sənəd:') }}</dt><dd>{{ lot.document }}</dd></div>
+            <div><dt>{{ $t('Əsas zədə:') }}</dt><dd>{{ lot.primaryDamage }}</dd></div>
+            <div><dt>{{ $t('Əlavə zədə:') }}</dt><dd>{{ lot.secondaryDamage }}</dd></div>
+            <div><dt>{{ $t('Ban növü:') }}</dt><dd>{{ lot.bodyType }}</dd></div>
+            <div><dt>{{ $t('Rəng:') }}</dt><dd>{{ lot.color }}</dd></div>
+            <div><dt>{{ $t('Mühərrik:') }}</dt><dd>{{ lot.engine }}</dd></div>
+            <div><dt>{{ $t('Sürət qutusu:') }}</dt><dd>{{ lot.transmission }}</dd></div>
+            <div><dt>{{ $t('Ötürücü:') }}</dt><dd>{{ lot.drive }}</dd></div>
+            <div><dt>{{ $t('Yanacaq:') }}</dt><dd>{{ lot.fuel }}</dd></div>
+            <div><dt>{{ $t('Açarlar:') }}</dt><dd>{{ lot.hasKeys ? $t('Var') : $t('Yoxdur') }}</dd></div>
+            <div><dt>{{ $t('Vəziyyət:') }}</dt><dd>{{ lot.condition }}</dd></div>
           </dl>
         </div>
       </div>
@@ -51,22 +51,22 @@
         <div class="card lot-page__box">
           <h2 class="lot-page__box-title">
             <i class="bi bi-receipt" />
-            Satış məlumatı
+            {{ $t('Satış məlumatı') }}
           </h2>
           <dl class="lot-page__list">
-            <div><dt>Auksion:</dt><dd>{{ lot.auction }}</dd></div>
-            <div><dt>Auksion növü:</dt><dd>{{ auctionTypeLabel }}</dd></div>
-            <div><dt>Hazırkı təklif:</dt><dd>{{ formatUsd(lot.currentBid) }}</dd></div>
-            <div><dt>Minimal rezerv:</dt><dd>{{ status.reserve }}</dd></div>
+            <div><dt>{{ $t('Auksion:') }}</dt><dd>{{ lot.auction }}</dd></div>
+            <div><dt>{{ $t('Auksion növü:') }}</dt><dd>{{ auctionTypeLabel }}</dd></div>
+            <div><dt>{{ $t('Hazırkı təklif:') }}</dt><dd>{{ formatUsd(lot.currentBid) }}</dd></div>
+            <div><dt>{{ $t('Minimal rezerv:') }}</dt><dd>{{ status.reserve }}</dd></div>
             <div>
-              <dt class="lot-page__green">İndi al:</dt>
+              <dt class="lot-page__green">{{ $t('İndi al:') }}</dt>
               <dd class="lot-page__green">{{ lot.buyNowPrice ? formatUsd(lot.buyNowPrice) : '—' }}</dd>
             </div>
-            <div><dt>Yer:</dt><dd>{{ lot.location }}</dd></div>
-            <div><dt>Hərrac tarixi:</dt><dd class="lot-page__blue">{{ formatDate(lot.saleDate) }}</dd></div>
-            <div><dt class="lot-page__red">Qalan vaxt:</dt><dd class="lot-page__red">{{ timeLeft }}</dd></div>
-            <div><dt>Satış statusu:</dt><dd>{{ status.label }}</dd></div>
-            <div><dt>Təx. bazar dəyəri:</dt><dd>{{ formatUsd(lot.retailValue) }}</dd></div>
+            <div><dt>{{ $t('Yer:') }}</dt><dd>{{ lot.location }}</dd></div>
+            <div><dt>{{ $t('Hərrac tarixi:') }}</dt><dd class="lot-page__blue">{{ formatDate(lot.saleDate) }}</dd></div>
+            <div><dt class="lot-page__red">{{ $t('Qalan vaxt:') }}</dt><dd class="lot-page__red">{{ timeLeft }}</dd></div>
+            <div><dt>{{ $t('Satış statusu:') }}</dt><dd>{{ $t(status.label) }}</dd></div>
+            <div><dt>{{ $t('Təx. bazar dəyəri:') }}</dt><dd>{{ formatUsd(lot.retailValue) }}</dd></div>
           </dl>
         </div>
       </div>
@@ -74,7 +74,7 @@
       <div v-if="lot.video" class="card lot-page__video">
         <h2 class="lot-page__box-title">
           <i class="bi bi-play-circle" />
-          Video
+          {{ $t('Video') }}
         </h2>
         <video :src="lot.video" controls preload="none" />
       </div>
@@ -84,20 +84,17 @@
       <div class="card lot-page__about">
         <h2 class="lot-page__box-title">
           <i class="bi bi-info-circle" />
-          Əlavə məlumat
+          {{ $t('Əlavə məlumat') }}
         </h2>
         <div class="lot-page__about-text">
           <p>
-            {{ lot.title }} avtomobili {{ formatDate(lot.saleDate) }} tarixində {{ lot.auction }} hərracına
-            çıxarılacaq. Avtomobil hazırda {{ lot.location }} ərazisindədir.
+            {{ $t('{title} avtomobili {date} tarixində {auction} hərracına çıxarılacaq.', { title: lot.title, date: formatDate(lot.saleDate), auction: lot.auction }) }} Avtomobil hazırda {{ lot.location }} ərazisindədir.
           </p>
           <p>
-            Kalkulyatorda təklif etmək istədiyiniz məbləği yazın və çatdırılma ölkəsini seçin — hərrac rüsumu, daşınma
-            və gömrük xərcləri ilə birlikdə yekun qiyməti dərhal görəcəksiniz.
+            {{ $t('Kalkulyatorda təklif etmək istədiyiniz məbləği yazın və çatdırılma ölkəsini seçin — hərrac rüsumu, daşınma və gömrük xərcləri ilə birlikdə yekun qiyməti dərhal görəcəksiniz.') }}
           </p>
           <p>
-            Hərracda iştirak etmək üçün bizimlə əlaqə saxlayın. Mütəxəssislərimiz bütün mərhələlər üzrə sizə kömək
-            edəcək.
+            {{ $t('Hərracda iştirak etmək üçün bizimlə əlaqə saxlayın. Mütəxəssislərimiz bütün mərhələlər üzrə sizə kömək edəcək.') }}
           </p>
         </div>
       </div>
@@ -127,9 +124,10 @@ export default defineComponent({
       throw createError({ statusCode: 404, statusMessage: 'Lot tapılmadı', fatal: true })
     }
 
+    const t = useNuxtApp().$t
     useSeoMeta({
-      title: `${lot.title} — Amerikadan gətirmə qiyməti | GLB Logistics`,
-      description: `${lot.title}, lot #${lot.lotNumber}. Yürüş, zədə, hərrac tarixi və Azərbaycana qədər yekun qiymət.`,
+      title: () => t('{0} — Amerikadan gətirmə qiyməti | GLB Logistics', { 0: lot.title }),
+      description: () => t('{0}, lot #{1}. Yürüş, zədə, hərrac tarixi və Azərbaycana qədər yekun qiymət.', { 0: lot.title, 1: lot.lotNumber }),
     })
   },
 
@@ -208,7 +206,7 @@ export default defineComponent({
       const diff = end - Date.now()
 
       if (diff <= 0) {
-        this.timeLeft = 'Hərrac bitib'
+        this.timeLeft = this.$t('Hərrac bitib')
         return
       }
 
@@ -216,7 +214,7 @@ export default defineComponent({
       const days = Math.floor(minutes / 1440)
       const hours = Math.floor((minutes % 1440) / 60)
       const mins = minutes % 60
-      this.timeLeft = days > 0 ? `${days} gün ${hours} saat` : `${hours} saat ${mins} dəq`
+      this.timeLeft = days > 0 ? this.$t('{days} gün {hours} saat', { days, hours }) : this.$t('{hours} saat {mins} dəq', { hours, mins })
     },
   },
 })

@@ -1,21 +1,21 @@
 <template>
   <div class="container">
     <PageHeader
-      title="Avtomobil izləmə"
-      subtitle="VIN kodu və ya lot nömrəsi ilə avtomobilinizin harada olduğunu öyrənin."
-      :crumbs="[{ label: 'İzləmə' }]"
+      :title="$t('Avtomobil izləmə')"
+      :subtitle="$t('VIN kodu və ya lot nömrəsi ilə avtomobilinizin harada olduğunu öyrənin.')"
+      :crumbs="[{ label: $t('İzləmə') }]"
     />
 
     <form class="card tracking-page__form" @submit.prevent="search">
-      <input v-model.trim="code" type="text" class="form-input" placeholder="VIN və ya lot nömrəsi">
+      <input v-model.trim="code" type="text" class="form-input" :placeholder="$t('VIN və ya lot nömrəsi')">
       <button type="submit" class="btn btn--accent">
         <i class="bi bi-search" />
-        Yoxla
+        {{ $t('Yoxla') }}
       </button>
     </form>
 
     <p class="tracking-page__hint">
-      Nümunə üçün yoxlayın:
+      {{ $t('Nümunə üçün yoxlayın:') }}
       <button type="button" @click="trySample">{{ trackingSample.code }}</button>
     </p>
 
@@ -37,8 +37,8 @@
 
     <div v-else-if="searched" class="card empty-state">
       <i class="bi bi-question-circle" />
-      <h2>Məlumat tapılmadı</h2>
-      <p>Kodu yoxlayın və ya menecerinizlə əlaqə saxlayın.</p>
+      <h2>{{ $t('Məlumat tapılmadı') }}</h2>
+      <p>{{ $t('Kodu yoxlayın və ya menecerinizlə əlaqə saxlayın.') }}</p>
     </div>
   </div>
 </template>

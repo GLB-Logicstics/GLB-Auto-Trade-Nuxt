@@ -10,40 +10,40 @@
         <h3 class="lot-row__title">
           <NuxtLink :to="link">{{ lot.title }}</NuxtLink>
         </h3>
-        <span class="lot-row__lot">Lot #{{ lot.lotNumber }} · {{ auctionTypeLabel }}</span>
+        <span class="lot-row__lot">Lot #{{ lot.lotNumber }} · {{ $t(auctionTypeLabel) }}</span>
         <span class="lot-row__status" :style="{ color: status.color }">
           <i :class="['bi', status.icon]"/>
-          {{ status.label }}
+          {{ $t(status.label) }}
         </span>
       </div>
 
       <div class="lot-row__col lot-row__col--main">
-        <p><span>Yürüş:</span> <strong>{{ formatMiles(lot.odometer, lot.odometerType) }}</strong></p>
-        <p><span>Təx. bazar dəyəri:</span> {{ formatUsd(lot.retailValue) }}</p>
+        <p><span>{{ $t('Yürüş:') }}</span> <strong>{{ formatMiles(lot.odometer, lot.odometerType) }}</strong></p>
+        <p><span>{{ $t('Təx. bazar dəyəri:') }}</span> {{ formatUsd(lot.retailValue) }}</p>
       </div>
 
       <div class="lot-row__col lot-row__col--wide">
-        <p><span>Sənəd:</span> {{ lot.document }}</p>
-        <p><span>Zədə:</span> {{ lot.primaryDamage }}</p>
-        <p><span>Açar:</span> <strong>{{ lot.hasKeys ? 'Var' : 'Yoxdur' }}</strong></p>
+        <p><span>{{ $t('Sənəd:') }}</span> {{ lot.document }}</p>
+        <p><span>{{ $t('Zədə:') }}</span> {{ lot.primaryDamage }}</p>
+        <p><span>{{ $t('Açar:') }}</span> <strong>{{ lot.hasKeys ? $t('Var') : $t('Yoxdur') }}</strong></p>
       </div>
 
       <div class="lot-row__col lot-row__col--wide">
         <p>{{ lot.location }}</p>
         <p class="lot-row__date">
-          <span>Hərrac tarixi:</span>
+          <span>{{ $t('Hərrac tarixi:') }}</span>
           {{ formatDate(lot.saleDate) }}
         </p>
       </div>
 
       <div class="lot-row__price">
-        <p><span>Hazırkı təklif:</span> <strong>{{ formatUsd(lot.currentBid) }}</strong></p>
+        <p><span>{{ $t('Hazırkı təklif:') }}</span> <strong>{{ formatUsd(lot.currentBid) }}</strong></p>
         <p>
-          <span>İndi al:</span>
+          <span>{{ $t('İndi al:') }}</span>
           <strong class="lot-row__buy">{{ lot.buyNowPrice ? formatUsd(lot.buyNowPrice) : '—' }}</strong>
         </p>
         <div class="lot-row__actions">
-          <NuxtLink :to="link" class="btn btn--accent lot-row__button">Ətraflı</NuxtLink>
+          <NuxtLink :to="link" class="btn btn--accent lot-row__button">{{ $t('Ətraflı') }}</NuxtLink>
           <FavouriteButton :id="`lot-${lot.id}`"/>
         </div>
       </div>
@@ -51,33 +51,33 @@
 
     <dl v-show="expanded" class="lot-row__more">
       <div>
-        <dt>Əlavə zədə:</dt>
+        <dt>{{ $t('Əlavə zədə:') }}</dt>
         <dd>{{ lot.secondaryDamage || '-' }}</dd>
       </div>
       <div>
-        <dt>Satış statusu:</dt>
-        <dd>{{ status.label }}</dd>
+        <dt>{{ $t('Satış statusu:') }}</dt>
+        <dd>{{ $t(status.label) }}</dd>
       </div>
       <div>
-        <dt>Sürət qutusu:</dt>
+        <dt>{{ $t('Sürət qutusu:') }}</dt>
         <dd>{{ lot.transmission || '-' }}</dd>
       </div>
       <div>
-        <dt>Ötürücü:</dt>
+        <dt>{{ $t('Ötürücü:') }}</dt>
         <dd>{{ lot.drive || '-' }}</dd>
       </div>
       <div>
-        <dt>Yanacaq növü:</dt>
+        <dt>{{ $t('Yanacaq növü:') }}</dt>
         <dd>{{ lot.fuel || '-' }}</dd>
       </div>
       <div>
-        <dt>Rəng:</dt>
+        <dt>{{ $t('Rəng:') }}</dt>
         <dd>{{ lot.color || '-' }}</dd>
       </div>
     </dl>
 
     <button type="button" class="lot-row__toggle" @click="expanded = !expanded">
-      {{ expanded ? 'Daha az −' : 'Daha çox +' }}
+      {{ expanded ? $t('Daha az −') : $t('Daha çox +') }}
     </button>
   </article>
 </template>

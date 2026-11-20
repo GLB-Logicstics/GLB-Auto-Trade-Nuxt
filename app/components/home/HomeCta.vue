@@ -2,17 +2,17 @@
   <section class="section">
     <div class="container home-cta">
       <div class="home-cta__box home-cta__box--main">
-        <h2>Hesab yaradın</h2>
-        <p>Bəyəndiyiniz avtomobilləri yadda saxlayın, müraciətlərinizi izləyin.</p>
+        <h2>{{ $t('Hesab yaradın') }}</h2>
+        <p>{{ $t('Bəyəndiyiniz avtomobilləri yadda saxlayın, müraciətlərinizi izləyin.') }}</p>
         <NuxtLink :to="loggedIn ? '/profile' : '/register'" class="btn home-cta__button">
-          {{ loggedIn ? 'Profilə keç' : 'Qeydiyyatdan keç' }}
+          {{ loggedIn ? $t('Profilə keç') : $t('Qeydiyyatdan keç') }}
         </NuxtLink>
       </div>
 
       <div class="home-cta__box">
-        <h2>Diler və ya partnyorsunuz?</h2>
-        <p>Avtomobillərinizi, xidmətlərinizi və ehtiyat hissələrinizi platformada təqdim edin.</p>
-        <NuxtLink to="/dealers" class="btn btn--accent">Diler ol</NuxtLink>
+        <h2>{{ $t('Diler və ya partnyorsunuz?') }}</h2>
+        <p>{{ $t('Avtomobillərinizi, xidmətlərinizi və ehtiyat hissələrinizi platformada təqdim edin.') }}</p>
+        <NuxtLink to="/dealers" class="btn btn--accent">{{ $t('Diler ol') }}</NuxtLink>
       </div>
     </div>
   </section>

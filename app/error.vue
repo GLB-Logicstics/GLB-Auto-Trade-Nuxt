@@ -4,12 +4,12 @@
       <div class="container error-page__inner">
         <span class="error-page__code">{{ error.statusCode }}</span>
         <h1 class="error-page__title">
-          {{ error.statusCode === 404 ? 'Səhifə tapılmadı' : 'Xəta baş verdi' }}
+          {{ error.statusCode === 404 ? $t('Səhifə tapılmadı') : $t('Xəta baş verdi') }}
         </h1>
         <p class="error-page__text">{{ error.statusMessage || error.message }}</p>
         <button type="button" class="btn btn--accent" @click="goHome">
           <i class="bi bi-house" />
-          Əsas səhifəyə qayıt
+          {{ $t('Əsas səhifəyə qayıt') }}
         </button>
       </div>
     </section>

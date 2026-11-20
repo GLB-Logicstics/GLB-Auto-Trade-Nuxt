@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <PageHeader
-      title="Gömrük kalkulyatoru"
-      subtitle="Avtomobilin Azərbaycanda və ya Gürcüstanda gömrük ödənişlərini özünüz hesablayın."
-      :crumbs="[{ label: 'Gömrük kalkulyatoru' }]"
+      :title="$t('Gömrük kalkulyatoru')"
+      :subtitle="$t('Avtomobilin Azərbaycanda və ya Gürcüstanda gömrük ödənişlərini özünüz hesablayın.')"
+      :crumbs="[{ label: $t('Gömrük kalkulyatoru') }]"
     />
 
     <CalculatorTabs />
@@ -12,7 +12,7 @@
       <form class="card" @submit.prevent>
         <h2 class="panel__title">
           <i class="bi bi-bank" />
-          Nəqliyyat vasitəsinin məlumatları
+          {{ $t('Nəqliyyat vasitəsinin məlumatları') }}
         </h2>
 
         <div class="panel__body">
@@ -24,39 +24,39 @@
               :class="{ 'is-active': form.country === item.value }"
               @click="form.country = item.value"
             >
-              {{ item.label }}
+              {{ $t(item.label) }}
             </button>
           </div>
 
           <div class="form-grid">
             <label v-if="isAzerbaijan" class="form-field">
-              <span>Avtomobilin qiyməti (USD)</span>
+              <span>{{ $t('Avtomobilin qiyməti (USD)') }}</span>
               <input v-model="form.price" type="number" min="0" class="form-input" placeholder="0">
             </label>
 
             <label v-if="isAzerbaijan" class="form-field">
-              <span>Nəqliyyat xərcləri (USD)</span>
+              <span>{{ $t('Nəqliyyat xərcləri (USD)') }}</span>
               <input v-model="form.transport" type="number" min="0" class="form-input" placeholder="0">
             </label>
 
             <label class="form-field">
-              <span>Mühərrik həcmi (sm³)</span>
+              <span>{{ $t('Mühərrik həcmi (sm³)') }}</span>
               <input v-model="form.engineCc" type="number" min="0" class="form-input" placeholder="2000">
             </label>
 
             <div class="form-field">
-              <span>Buraxılış ili</span>
+              <span>{{ $t('Buraxılış ili') }}</span>
               <BaseSelect v-model="form.year" :options="years" :clearable="false" />
             </div>
 
             <div class="form-field">
-              <span>Yanacaq növü</span>
+              <span>{{ $t('Yanacaq növü') }}</span>
               <BaseSelect v-model="form.fuel" :options="fuelOptions" :clearable="false" />
             </div>
 
             <label v-if="!isAzerbaijan" class="checkbox customs-calc__check">
               <input v-model="form.rightHand" type="checkbox">
-              Sağ sükan
+              {{ $t('Sağ sükan') }}
             </label>
           </div>
         </div>
@@ -65,19 +65,19 @@
       <div class="card">
         <h2 class="panel__title">
           <i class="bi bi-receipt" />
-          Nəticə
+          {{ $t('Nəticə') }}
         </h2>
 
         <div class="panel__body">
           <dl class="info-list">
             <div v-for="line in lines" :key="line.label">
-              <dt>{{ line.label }}</dt>
+              <dt>{{ $t(line.label) }}</dt>
               <dd>{{ money(line.value) }}</dd>
             </div>
           </dl>
 
           <p class="customs-calc__total">
-            <span>Cəmi gömrük ödənişi</span>
+            <span>{{ $t('Cəmi gömrük ödənişi') }}</span>
             <strong>{{ money(total) }}</strong>
             <small>≈ {{ formatMoney(totalUsd) }}</small>
           </p>
@@ -85,10 +85,10 @@
           <p class="customs-calc__note">
             {{
               isAzerbaijan
-                ? 'Dövlət Gömrük Komitəsinin dərəcələrinə əsasən.'
-                : 'Gürcüstan Gəlirlər Xidmətinin (rs.ge) 2026 dərəcələrinə əsasən.'
+                ? $t('Dövlət Gömrük Komitəsinin dərəcələrinə əsasən.')
+                : $t('Gürcüstan Gəlirlər Xidmətinin (rs.ge) 2026 dərəcələrinə əsasən.')
             }}
-            Hesablama təxminidir, məzənnə: {{ isAzerbaijan ? `1 USD = ${aznRate} AZN` : `1 GEL = ${gelToUsd} USD` }}.
+            {{ $t('Hesablama təxminidir, məzənnə:') }} {{ isAzerbaijan ? `1 USD = ${aznRate} AZN` : `1 GEL = ${gelToUsd} USD` }}.
           </p>
         </div>
       </div>
@@ -110,9 +110,10 @@ export default defineComponent({
   name: 'CustomsCalculatorPage',
 
   setup() {
+    const t = useNuxtApp().$t
     useSeoMeta({
-      title: 'Gömrük kalkulyatoru — GLB Logistics',
-      description: 'Azərbaycan və Gürcüstan üçün avtomobil gömrük rüsumu, aksiz, ƏDV və yığımların hesablanması.',
+      title: () => t('Gömrük kalkulyatoru — GLB Logistics'),
+      description: () => t('Azərbaycan və Gürcüstan üçün avtomobil gömrük rüsumu, aksiz, ƏDV və yığımların hesablanması.'),
     })
   },
 

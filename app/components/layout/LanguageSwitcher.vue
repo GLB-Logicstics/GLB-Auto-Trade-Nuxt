@@ -1,8 +1,8 @@
 <template>
   <div v-click-outside="close" class="lang">
-    <button type="button" class="lang__toggle" aria-label="Dil" @click="open = !open">
+    <button type="button" class="lang__toggle" :aria-label="$t('Dil')" @click="open = !open">
       <i class="bi bi-globe2 lang__globe" />
-      {{ language.toUpperCase() }}
+      {{ lang.toUpperCase() }}
       <i class="bi bi-chevron-down lang__chevron" />
     </button>
 
@@ -12,10 +12,10 @@
           <button
             type="button"
             class="lang__option"
-            :class="{ 'is-active': item.code === language }"
+            :class="{ 'is-active': item.code === lang }"
             @click="select(item.code)"
           >
-            {{ item.label }}
+            {{ item.name }}
           </button>
         </li>
       </ul>
@@ -26,8 +26,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { mapActions, mapState } from 'pinia'
-import { useSiteStore } from '~/stores/site'
-import { useUiStore } from '~/stores/ui'
+import { useI18nStore } from '~/stores/i18n'
 
 export default defineComponent({
   name: 'LanguageSwitcher',
@@ -37,12 +36,11 @@ export default defineComponent({
   },
 
   computed: {
-    ...mapState(useSiteStore, ['languages']),
-    ...mapState(useUiStore, ['language']),
+    ...mapState(useI18nStore, ['languages', 'lang']),
   },
 
   methods: {
-    ...mapActions(useUiStore, ['setLanguage']),
+    ...mapActions(useI18nStore, ['setLanguage']),
 
     select(code: string) {
       this.setLanguage(code)

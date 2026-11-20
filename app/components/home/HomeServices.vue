@@ -2,9 +2,9 @@
   <section class="section">
     <div class="container">
       <SectionHeading
-        title="Bizim"
-        highlight="xidmətlər"
-        subtitle="Hərracdan qapınıza qədər bütün mərhələlər bir yerdə"
+        :title="$t('Bizim')"
+        :highlight="$t('xidmətlər')"
+        :subtitle="$t('Hərracdan qapınıza qədər bütün mərhələlər bir yerdə')"
       />
 
       <div class="home-services">

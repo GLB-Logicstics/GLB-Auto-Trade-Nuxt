@@ -1,10 +1,10 @@
 <template>
   <NuxtLink :to="`/services/${service.slug}`" class="service-card">
     <span class="service-card__icon"><i :class="['bi', service.icon]" /></span>
-    <h3 class="service-card__title">{{ service.title }}</h3>
-    <p class="service-card__text">{{ service.short }}</p>
+    <h3 class="service-card__title">{{ $tr(service, 'title') }}</h3>
+    <p class="service-card__text">{{ $tr(service, 'short') }}</p>
     <span class="link-arrow">
-      Ətraflı
+      {{ $t('Ətraflı') }}
       <i class="bi bi-arrow-right" />
     </span>
   </NuxtLink>

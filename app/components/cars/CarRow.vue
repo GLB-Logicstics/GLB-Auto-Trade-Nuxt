@@ -3,29 +3,29 @@
     <div class="car-row__main">
       <NuxtLink :to="link" class="car-row__image">
         <img :src="car.image" :alt="car.title" width="240" height="180" loading="lazy" @error="onImageError">
-        <span class="car-row__status">{{ car.sold ? 'Satılıb' : 'Satılır' }}</span>
+        <span class="car-row__status">{{ car.sold ? $t('Satılıb') : $t('Satılır') }}</span>
       </NuxtLink>
 
       <div class="car-row__info">
         <h3 class="car-row__title">
           <NuxtLink :to="link">{{ car.year }} {{ car.title }}</NuxtLink>
         </h3>
-        <p><span>Mühərrik:</span> {{ car.engine }} / {{ car.power }} a.g.</p>
+        <p><span>{{ $t('Mühərrik:') }}</span> {{ car.engine }} / {{ car.power }} a.g.</p>
         <p class="car-row__dealer"><i class="bi bi-shop" /> {{ car.dealer.name }}</p>
       </div>
 
       <div class="car-row__col">
-        <p><span>Yürüş:</span> <strong>{{ car.mileage }}</strong></p>
-        <p><span>Yanacaq:</span> {{ car.fuel }}</p>
+        <p><span>{{ $t('Yürüş:') }}</span> <strong>{{ car.mileage }}</strong></p>
+        <p><span>{{ $t('Yanacaq:') }}</span> {{ car.fuel }}</p>
       </div>
 
       <div class="car-row__price">
-        <p><span>Qiymət:</span> <strong>{{ formatUsd(car.price) }}</strong></p>
-        <p v-if="diff > 0" class="car-row__diff">+{{ formatUsd(diff) }} bazar qiymətindən ucuz</p>
-        <p><span>Yeri:</span> {{ car.location }}</p>
+        <p><span>{{ $t('Qiymət:') }}</span> <strong>{{ formatUsd(car.price) }}</strong></p>
+        <p v-if="diff > 0" class="car-row__diff">+{{ formatUsd(diff) }} {{ $t('bazar qiymətindən ucuz') }}</p>
+        <p><span>{{ $t('Yeri:') }}</span> {{ car.location }}</p>
         <div class="car-row__actions">
-          <NuxtLink :to="link" class="btn btn--accent car-row__button">Ətraflı</NuxtLink>
-          <a :href="whatsapp" class="car-row__wa" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <NuxtLink :to="link" class="btn btn--accent car-row__button">{{ $t('Ətraflı') }}</NuxtLink>
+          <a :href="whatsapp" class="car-row__wa" target="_blank" rel="noopener" :aria-label="$t('WhatsApp')" @click="track">
             <i class="bi bi-whatsapp" />
           </a>
           <FavouriteButton :id="`car-${car.id}`" />
@@ -34,22 +34,23 @@
     </div>
 
     <dl v-show="expanded" class="car-row__more">
-      <div><dt>Ban növü</dt><dd>{{ car.bodyType }}</dd></div>
-      <div><dt>Rəng</dt><dd>{{ car.color }}</dd></div>
-      <div><dt>Sürət qutusu</dt><dd>{{ car.transmission }}</dd></div>
-      <div><dt>Ötürücü</dt><dd>{{ car.drive }}</dd></div>
-      <div><dt>VIN</dt><dd>{{ car.vin }}</dd></div>
-      <div><dt>Bazar qiyməti</dt><dd>{{ formatUsd(car.marketPrice) }}</dd></div>
+      <div><dt>{{ $t('Ban növü') }}</dt><dd>{{ car.bodyType }}</dd></div>
+      <div><dt>{{ $t('Rəng') }}</dt><dd>{{ car.color }}</dd></div>
+      <div><dt>{{ $t('Sürət qutusu') }}</dt><dd>{{ car.transmission }}</dd></div>
+      <div><dt>{{ $t('Ötürücü') }}</dt><dd>{{ car.drive }}</dd></div>
+      <div><dt>{{ $t('VIN') }}</dt><dd>{{ car.vin }}</dd></div>
+      <div><dt>{{ $t('Bazar qiyməti') }}</dt><dd>{{ formatUsd(car.marketPrice) }}</dd></div>
     </dl>
 
     <button type="button" class="car-row__toggle" @click="expanded = !expanded">
-      {{ expanded ? 'Daha az −' : 'Daha çox +' }}
+      {{ expanded ? $t('Daha az −') : $t('Daha çox +') }}
     </button>
   </article>
 </template>
 
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
+import { trackClick } from '~/utils/api'
 import { formatUsd, onImageError, whatsappLink } from '~/utils/format'
 import type { LocalCar } from '~/types'
 
@@ -79,6 +80,10 @@ export default defineComponent({
   },
 
   methods: {
+    track() {
+      trackClick(this.car.id, 'whatsapp')
+    },
+
     formatUsd,
     onImageError,
   },

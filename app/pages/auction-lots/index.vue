@@ -1,9 +1,9 @@
 <template>
   <div class="container lots-page">
-    <Breadcrumbs :items="[{ label: 'Əsas səhifə', to: '/' }, { label: 'Hərrac lotları' }]" />
+    <Breadcrumbs :items="[{ label: $t('Əsas səhifə'), to: '/' }, { label: $t('Hərrac lotları') }]" />
 
     <div class="card lots-page__chips">
-      <span class="lots-page__chips-title">Populyar filtrlər:</span>
+      <span class="lots-page__chips-title">{{ $t('Populyar filtrlər:') }}</span>
       <button
         v-for="chip in chips"
         :key="chip.key"
@@ -12,7 +12,7 @@
         :class="{ 'is-active': filters[chip.key] }"
         @click="toggleFlag(chip.key)"
       >
-        {{ chip.label }}
+        {{ $t(chip.label) }}
       </button>
     </div>
 
@@ -20,14 +20,14 @@
       <div v-if="filtersOpen" class="lots-page__backdrop" @click="filtersOpen = false" />
 
       <aside class="card lots-page__sidebar" :class="{ 'is-open': filtersOpen }">
-        <button type="button" class="lots-page__close" aria-label="Bağla" @click="filtersOpen = false">
+        <button type="button" class="lots-page__close" :aria-label="$t('Bağla')" @click="filtersOpen = false">
           <i class="bi bi-x-lg" />
         </button>
 
         <LotFilters />
 
         <button type="button" class="btn btn--accent lots-page__apply" @click="filtersOpen = false">
-          {{ total }} nəticəni göstər
+          {{ $t('{count} nəticəni göstər', { count: total }) }}
         </button>
       </aside>
 
@@ -35,14 +35,14 @@
         <div class="card lots-page__toolbar">
           <button type="button" class="lots-page__filter-button" @click="filtersOpen = true">
             <i class="bi bi-sliders" />
-            Filtrlər
+            {{ $t('Filtrlər') }}
             <span v-if="activeCount" class="lots-page__filter-count">{{ activeCount }}</span>
           </button>
 
           <p class="lots-page__range">{{ rangeText }}</p>
 
           <div class="lots-page__sort">
-            <span>Sırala:</span>
+            <span>{{ $t('Sırala:') }}</span>
             <BaseSelect
               :model-value="sort"
               :options="sortOptions"
@@ -53,7 +53,7 @@
             <button
               type="button"
               class="lots-page__order"
-              :aria-label="order === 'asc' ? 'Artan' : 'Azalan'"
+              :aria-label="order === 'asc' ? $t('Artan') : $t('Azalan')"
               @click="toggleOrder"
             >
               <i :class="['bi', order === 'asc' ? 'bi-sort-down-alt' : 'bi-sort-down']" />
@@ -62,7 +62,7 @@
         </div>
 
         <div v-if="filters.q" class="lots-page__query">
-          "{{ filters.q }}" üzrə axtarış
+          {{ $t('"{q}" üzrə axtarış', { q: filters.q }) }}
           <button type="button" @click="setText('q', '')"><i class="bi bi-x" /></button>
         </div>
 
@@ -73,9 +73,9 @@
 
         <div v-else class="card lots-page__empty">
           <i class="bi bi-search" />
-          <h2>Nəticə tapılmadı</h2>
-          <p>Seçdiyiniz filtrlərə uyğun avtomobil yoxdur.</p>
-          <button type="button" class="btn btn--accent" @click="resetFilters">Filtrləri təmizlə</button>
+          <h2>{{ $t('Nəticə tapılmadı') }}</h2>
+          <p>{{ $t('Seçdiyiniz filtrlərə uyğun avtomobil yoxdur.') }}</p>
+          <button type="button" class="btn btn--accent" @click="resetFilters">{{ $t('Filtrləri təmizlə') }}</button>
         </div>
       </div>
     </div>
@@ -92,9 +92,10 @@ export default defineComponent({
   name: 'AuctionLotsPage',
 
   setup() {
+    const t = useNuxtApp().$t
     useSeoMeta({
-      title: 'Hərrac lotları — GLB Logistics',
-      description: 'Copart, IAAI və Manheim hərraclarından avtomobillər. Auksion, növ, tarix və digər filtrlər, tam qiymət hesablaması.',
+      title: () => t('Hərrac lotları — GLB Logistics'),
+      description: () => t('Copart, IAAI və Manheim hərraclarından avtomobillər. Auksion, növ, tarix və digər filtrlər, tam qiymət hesablaması.'),
     })
   },
 

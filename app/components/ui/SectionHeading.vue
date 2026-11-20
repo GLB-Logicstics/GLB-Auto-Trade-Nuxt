@@ -2,9 +2,9 @@
   <div class="section-heading">
     <span class="section-heading__line" />
     <h2 class="section-heading__title">
-      {{ title }} <span class="section-heading__highlight">{{ highlight }}</span>
+      {{ $t(title) }} <span class="section-heading__highlight">{{ $t(highlight) }}</span>
     </h2>
-    <p class="section-heading__subtitle">{{ subtitle }}</p>
+    <p class="section-heading__subtitle">{{ $t(subtitle) }}</p>
   </div>
 </template>
 

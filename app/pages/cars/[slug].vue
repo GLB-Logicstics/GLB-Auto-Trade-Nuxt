@@ -15,7 +15,7 @@
 
         <button type="button" class="car-page__favourite" :class="{ 'is-active': isFavourite }" @click="toggle(favouriteId)">
           <i :class="['bi', isFavourite ? 'bi-heart-fill' : 'bi-heart']" />
-          {{ isFavourite ? 'Seçilmişlərdədir' : 'Seçilmişlərə əlavə et' }}
+          {{ isFavourite ? $t('Seçilmişlərdədir') : $t('Seçilmişlərə əlavə et') }}
         </button>
       </div>
 
@@ -26,7 +26,7 @@
           <div class="card car-page__price-card">
             <h2 class="car-page__box-title">
               <i class="bi bi-tag" />
-              Satış məlumatı
+              {{ $t('Satış məlumatı') }}
             </h2>
 
             <div class="car-page__price-body">
@@ -34,24 +34,24 @@
               <p class="car-page__price">{{ formatUsd(car.price) }}</p>
               <p class="car-page__azn">≈ {{ formatAzn(car.price * aznRate) }}</p>
               <p class="car-page__market">
-                Yerli bazar qiyməti: <b>{{ formatUsd(car.marketPrice) }}</b>
-                <span v-if="car.marketPrice > car.price">+{{ formatUsd(car.marketPrice - car.price) }} ucuz</span>
+                {{ $t('Yerli bazar qiyməti:') }} <b>{{ formatUsd(car.marketPrice) }}</b>
+                <span v-if="car.marketPrice > car.price">+{{ formatUsd(car.marketPrice - car.price) }} {{ $t('ucuz') }}</span>
               </p>
               <p class="car-page__dealer"><i class="bi bi-shop" /> {{ car.dealer.name }}</p>
 
               <span class="car-page__status" :class="{ 'is-sold': car.sold }">
                 <i :class="['bi', car.sold ? 'bi-x-circle' : 'bi-check-circle']" />
-                {{ car.sold ? 'Satılıb' : 'Satışdadır' }}
+                {{ car.sold ? $t('Satılıb') : $t('Satışdadır') }}
               </span>
 
               <div class="car-page__actions">
-                <a :href="whatsappLink" class="btn btn--accent" target="_blank" rel="noopener">
+                <a :href="whatsappLink" class="btn btn--accent" target="_blank" rel="noopener" @click="track('whatsapp')">
                   <i class="bi bi-whatsapp" />
-                  WhatsApp ilə yaz
+                  {{ $t('WhatsApp ilə yaz') }}
                 </a>
-                <a :href="phoneHref" class="btn car-page__call">
+                <a :href="dealerPhoneHref" class="btn car-page__call" @click="track('phone')">
                   <i class="bi bi-telephone" />
-                  {{ contact.phoneDisplay }}
+                  {{ car.dealer.phoneDisplay || contact.phoneDisplay }}
                 </a>
               </div>
             </div>
@@ -60,21 +60,21 @@
           <div class="card">
             <h2 class="car-page__box-title">
               <i class="bi bi-card-list" />
-              Ümumi məlumat
+              {{ $t('Ümumi məlumat') }}
             </h2>
             <dl class="car-page__list">
-              <div><dt>Marka:</dt><dd>{{ car.make }}</dd></div>
-              <div><dt>Model:</dt><dd>{{ car.model }}</dd></div>
-              <div><dt>Versiya:</dt><dd>{{ car.version }}</dd></div>
-              <div><dt>İl:</dt><dd>{{ car.year }}</dd></div>
-              <div><dt>Ban növü:</dt><dd>{{ car.bodyType }}</dd></div>
-              <div><dt>Rəng:</dt><dd>{{ car.color }}</dd></div>
-              <div><dt>Mühərrik:</dt><dd>{{ car.engine }} / {{ car.power }} a.g.</dd></div>
-              <div><dt>Yanacaq:</dt><dd>{{ car.fuel }}</dd></div>
-              <div><dt>Yürüş:</dt><dd>{{ car.mileage }}</dd></div>
-              <div><dt>Sürət qutusu:</dt><dd>{{ car.transmission }}</dd></div>
-              <div><dt>Ötürücü:</dt><dd>{{ car.drive }}</dd></div>
-              <div><dt>VIN:</dt><dd>{{ car.vin }}</dd></div>
+              <div><dt>{{ $t('Marka:') }}</dt><dd>{{ car.make }}</dd></div>
+              <div><dt>{{ $t('Model:') }}</dt><dd>{{ car.model }}</dd></div>
+              <div><dt>{{ $t('Versiya:') }}</dt><dd>{{ car.version }}</dd></div>
+              <div><dt>{{ $t('İl:') }}</dt><dd>{{ car.year }}</dd></div>
+              <div><dt>{{ $t('Ban növü:') }}</dt><dd>{{ car.bodyType }}</dd></div>
+              <div><dt>{{ $t('Rəng:') }}</dt><dd>{{ car.color }}</dd></div>
+              <div><dt>{{ $t('Mühərrik:') }}</dt><dd>{{ car.engine }} / {{ car.power }} a.g.</dd></div>
+              <div><dt>{{ $t('Yanacaq:') }}</dt><dd>{{ car.fuel }}</dd></div>
+              <div><dt>{{ $t('Yürüş:') }}</dt><dd>{{ car.mileage }}</dd></div>
+              <div><dt>{{ $t('Sürət qutusu:') }}</dt><dd>{{ car.transmission }}</dd></div>
+              <div><dt>{{ $t('Ötürücü:') }}</dt><dd>{{ car.drive }}</dd></div>
+              <div><dt>{{ $t('VIN:') }}</dt><dd>{{ car.vin }}</dd></div>
             </dl>
           </div>
         </div>
@@ -83,13 +83,13 @@
       <div class="card car-page__about">
         <h2 class="car-page__box-title">
           <i class="bi bi-info-circle" />
-          Ətraflı məlumat
+          {{ $t('Ətraflı məlumat') }}
         </h2>
         <div class="car-page__about-body">
-          <p v-for="(text, index) in car.description" :key="index">{{ text }}</p>
+          <p v-for="(text, index) in $tr(car, 'description')" :key="index">{{ text }}</p>
 
           <ul class="car-page__features">
-            <li v-for="feature in car.features" :key="feature">
+            <li v-for="feature in $tr(car, 'features')" :key="feature">
               <i class="bi bi-check2" />
               {{ feature }}
             </li>
@@ -109,7 +109,8 @@ import { tariffs } from '~/utils/tariffs'
 import { useCarsStore } from '~/stores/cars'
 import { useFavouritesStore } from '~/stores/favourites'
 import { useSiteStore } from '~/stores/site'
-import { formatAzn, formatUsd } from '~/utils/format'
+import { trackClick } from '~/utils/api'
+import { formatAzn, formatUsd, whatsappLink as whatsappLinkTo } from '~/utils/format'
 import type { CarSection, LocalCar, SaleStatus } from '~/types'
 
 export default defineComponent({
@@ -123,9 +124,10 @@ export default defineComponent({
       throw createError({ statusCode: 404, statusMessage: 'Avtomobil tapılmadı', fatal: true })
     }
 
+    const t = useNuxtApp().$t
     useSeoMeta({
-      title: `${car.year} ${car.title} — Bakıda satışda | GLB Logistics`,
-      description: `${car.year} ${car.title}, ${car.mileage}, ${car.engine}. Qiymət: $${car.price}.`,
+      title: () => t('{0} {1} — Bakıda satışda | GLB Logistics', { 0: car.year, 1: car.title }),
+      description: () => t('{0} {1}, {2}, {3}. Qiymət: ${4}.', { 0: car.year, 1: car.title, 2: car.mileage, 3: car.engine, 4: car.price }),
     })
   },
 
@@ -157,7 +159,12 @@ export default defineComponent({
 
     whatsappLink(): string {
       const text = `Salam, ${this.car!.year} ${this.car!.title} (VIN: ${this.car!.vin}) haqqında məlumat almaq istəyirəm.`
+      if (this.car!.dealer.phone) return whatsappLinkTo(this.car!.dealer.phone, text)
       return `${this.contact.whatsapp}?text=${encodeURIComponent(text)}`
+    },
+
+    dealerPhoneHref(): string {
+      return this.car!.dealer.phone ? `tel:${this.car!.dealer.phone}` : this.phoneHref
     },
 
     breadcrumbs() {
@@ -183,6 +190,10 @@ export default defineComponent({
   },
 
   methods: {
+    track(type: 'whatsapp' | 'phone') {
+      trackClick(this.car!.id, type)
+    },
+
     ...mapActions(useFavouritesStore, ['toggle']),
     formatAzn,
     formatUsd,
