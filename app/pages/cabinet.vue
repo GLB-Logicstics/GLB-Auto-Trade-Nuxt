@@ -188,6 +188,7 @@ import { useAuthStore } from '~/stores/auth'
 import { useSiteStore } from '~/stores/site'
 import { apiFetch, apiMessage } from '~/utils/api'
 import { formatUsd, PLACEHOLDER_IMAGE } from '~/utils/format'
+import { readFileAsDataUrl } from '~/utils/image'
 import type { DealerCar, Option } from '~/types'
 
 function list(values: string[]): Option[] {
@@ -304,12 +305,7 @@ export default defineComponent({
       this.uploading = true
       for (const file of files) {
         try {
-          const data = await new Promise<string>((resolve, reject) => {
-            const reader = new FileReader()
-            reader.onload = () => resolve(String(reader.result))
-            reader.onerror = reject
-            reader.readAsDataURL(file)
-          })
+          const data = await readFileAsDataUrl(file)
           const result = await apiFetch<{ url: string }>('/user/upload', { method: 'POST', body: { name: file.name, data } })
           this.form.images.push(result.url)
         } catch (error) {
