@@ -14,22 +14,19 @@
       </button>
     </form>
 
-    <p class="tracking-page__hint">
-      {{ $t('Nümunə üçün yoxlayın:') }}
-      <button type="button" @click="trySample">{{ trackingSample.code }}</button>
-    </p>
+    <p v-if="loading" class="tracking-page__hint">{{ $t('Yüklənir...') }}</p>
 
-    <div v-if="searched && found" class="card">
+    <div v-else-if="result" class="card">
       <h2 class="panel__title">
         <i class="bi bi-geo" />
-        {{ trackingSample.title }} — {{ trackingSample.code }}
+        {{ result.title }} — {{ result.code || result.lot }}
       </h2>
       <ol class="tracking-page__steps">
-        <li v-for="step in trackingSample.steps" :key="step.title" :class="{ 'is-done': step.done }">
+        <li v-for="(step, index) in result.steps" :key="index" :class="{ 'is-done': step.done }">
           <span class="tracking-page__dot"><i :class="['bi', step.done ? 'bi-check-lg' : 'bi-clock']" /></span>
           <div>
-            <strong>{{ step.title }}</strong>
-            <small>{{ step.date }}</small>
+            <strong>{{ $t(step.title) }}</strong>
+            <small>{{ $t(step.date) }}</small>
           </div>
         </li>
       </ol>
@@ -45,8 +42,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { mapState } from 'pinia'
-import { useContentStore } from '~/stores/content'
+import { apiFetch } from '~/utils/api'
+import type { TrackingInfo } from '~/types'
 
 export default defineComponent({
   name: 'TrackingPage',
@@ -57,26 +54,27 @@ export default defineComponent({
 
   data() {
     return {
-      code: '',
+      code: String(this.$route.query.code || ''),
       searched: false,
+      loading: false,
+      result: null as TrackingInfo | null,
     }
   },
 
-  computed: {
-    ...mapState(useContentStore, ['trackingSample']),
-
-    found(): boolean {
-      return this.code.toUpperCase() === this.trackingSample.code || this.code === '72166236'
-    },
+  mounted() {
+    if (this.code) this.search()
   },
 
   methods: {
-    search() {
-      this.searched = !!this.code
-    },
-
-    trySample() {
-      this.code = this.trackingSample.code
+    async search() {
+      if (!this.code) return
+      this.loading = true
+      try {
+        this.result = await apiFetch<TrackingInfo>('/public/tracking', { query: { code: this.code } })
+      } catch {
+        this.result = null
+      }
+      this.loading = false
       this.searched = true
     },
   },

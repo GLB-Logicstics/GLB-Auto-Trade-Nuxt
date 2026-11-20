@@ -1,11 +1,10 @@
 import { defineStore } from 'pinia'
-import type { InfoPage, Service, TrackingStep } from '~/types'
+import type { InfoPage, Service } from '~/types'
 
 export const useContentStore = defineStore('content', {
   state: () => ({
     services: [] as Service[],
     infoPages: [] as InfoPage[],
-    trackingSample: { code: '', title: '', steps: [] as TrackingStep[] },
   }),
 
   getters: {

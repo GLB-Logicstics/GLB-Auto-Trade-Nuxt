@@ -28,7 +28,6 @@ export default defineNuxtPlugin(async () => {
   useCatalogStore().$patch({ items: value.catalog })
   useHomeStore().$patch({ heroSlides: value.hero_slides, brands: value.brands })
   useContentStore().$patch({ services: value.services, infoPages: value.pages })
-  if (settings.tracking_sample) useContentStore().$patch({ trackingSample: settings.tracking_sample })
 
   if (settings.site) {
     const { socialLinks, ...info } = settings.site

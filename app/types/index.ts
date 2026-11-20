@@ -51,6 +51,7 @@ export interface SiteInfo {
   logoDark: string
   about: string
   contact: ContactInfo
+  registrationOpen?: boolean
 }
 
 export interface HeroSlide {
@@ -244,6 +245,13 @@ export interface TrackingStep {
   done: boolean
 }
 
+export interface TrackingInfo {
+  code: string
+  lot: string
+  title: string
+  steps: TrackingStep[]
+}
+
 export interface RequestItem {
   id: number
   subject: string
@@ -398,7 +406,6 @@ export interface Bootstrap {
     site?: SiteSettings
     tariffs?: Tariffs
     price_history?: Record<string, PricePoint[]>
-    tracking_sample?: { code: string; title: string; steps: TrackingStep[] }
   }
 }
 

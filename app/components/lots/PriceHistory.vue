@@ -46,7 +46,11 @@ export default defineComponent({
     },
 
     points(): PricePoint[] {
-      return this.priceHistory[this.name] || this.priceHistory[this.lot.make] || []
+      const find = (name: string) => {
+        const key = Object.keys(this.priceHistory).find((item) => item.toUpperCase() === name.toUpperCase())
+        return key ? this.priceHistory[key] : undefined
+      }
+      return find(this.name) || find(this.lot.make) || []
     },
 
     max(): number {
